@@ -3,10 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mental Health Chatbot</title>
+    <title>Ssuubi - Mental Health Support</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #818cf8;
+            --accent-color: #4f46e5;
+            --background-color: #f8fafc;
+        }
+
+        body {
+            background-color: var(--background-color);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .chat-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .message {
+            max-width: 80%;
+            margin: 8px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .user {
+            background-color: var(--primary-color);
+            color: white;
+            margin-left: auto;
+        }
+
+        .bot {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .typing-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: #6b7280;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        .resource-link {
+            color: var(--accent-color);
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+
+        .resource-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .mood-indicator {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .input-container {
+            background: white;
+            border: 2px solid #e5e7eb;
+            transition: border-color 0.2s;
+        }
+
+        .input-container:focus-within {
+            border-color: var(--primary-color);
+        }
+    </style>
 </head>
-<body>
-    <h1>Welcome to the Mental Health Chatbot</h1>
-    <p>Start chatting by sending a message.</p>
+<body class="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-indigo-600 mb-2">Ssuubi</h1>
+            <p class="text-gray-600">Your Compassionate Mental Health Support Assistant</p>
+        </header>
+
+        <!-- Main Chat Interface -->
+        <div class="max-w-4xl mx-auto">
+            <div class="chat-container rounded-2xl shadow-lg p-4">
+                <!-- Chat Header -->
+                <div class="border-b pb-4 mb-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                            <span class="font-medium text-gray-700">Active Session</span>
+                        </div>
+                        <div class="mood-indicator bg-gray-100">
+                            <i class="fas fa-brain text-indigo-500"></i>
+                            <span class="ml-1 text-gray-600">Sentiment Analysis Active</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Messages -->
+                <div id="chat-box" class="h-96 overflow-y-auto mb-4 p-4">
+                    <div class="message bot">
+                        Hello! 👋 I'm Ssuubi, your mental health support assistant. How are you feeling today?
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="input-container rounded-xl p-3">
+                    <div class="flex items-center gap-3">
+                        <input 
+                            id="user-input"
+                            type="text" 
+                            placeholder="Type your message here..."
+                            class="flex-1 outline-none text-gray-700 placeholder-gray-400"
+                        >
+                        <button 
+                            id="send-btn"
+                            class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
+                        >
+                            <i class="fas fa-paper-plane mr-2"></i>Send
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Features List -->
+                <div class="mt-6 grid grid-cols-2 gap-4 text-sm text-gray-600">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-brain text-indigo-500"></i>
+                        <span>Advanced Sentiment Analysis</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-shield-alt text-indigo-500"></i>
+                        <span>Crisis Detection</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-heart text-indigo-500"></i>
+                        <span>Emotional Support</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-hands-helping text-indigo-500"></i>
+                        <span>Coping Strategies</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="text-center mt-8 text-sm text-gray-500">
+                <p>If you're experiencing a crisis, please reach out:</p>
+                <p class="mt-2">
+                    <a href="tel:1-800-273-8255" class="resource-link">Crisis Hotline: 1-800-273-8255</a>
+                    <span class="mx-2">|</span>
+                    <span>Text HOME to 741741</span>
+                </p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        function addMessage(sender, message) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', sender);
+            messageElement.innerHTML = `<p>${message}</p>`;
+            chatBox.appendChild(messageElement);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        async function handleUserInput() {
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage('user', message);
+            userInput.value = '';
+
+            // Show typing indicator
+            const typingIndicator = document.createElement('div');
+            typingIndicator.classList.add('message', 'bot');
+            typingIndicator.innerHTML = `
+                <div class="typing-indicator">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            chatBox.appendChild(typingIndicator);
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        session_id: 'demo-session',
+                        message: message
+                    }),
+                });
+
+                const data = await response.json();
+                
+                // Remove typing indicator
+                chatBox.removeChild(typingIndicator);
+                
+                // Add bot response
+                addMessage('bot', data.message);
+
+            } catch (error) {
+                console.error('Error:', error);
+                chatBox.removeChild(typingIndicator);
+                addMessage('bot', 'I apologize, but I encountered an error. Please try again.');
+            }
+        }
+
+        sendBtn.addEventListener('click', handleUserInput);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleUserInput();
+            }
+        });
+    </script>
 </body>
 </html>
