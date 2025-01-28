@@ -1,6 +1,6 @@
 import pytest
 from app.services.conversation_manager import ConversationManager
-from app.services.response_generator import ResponseGenerator
+from app.services.conversation_handler import ResponseGenerator
 
 def test_conversation_manager():
     manager = ConversationManager()

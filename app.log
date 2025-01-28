@@ -258,3 +258,44 @@ LookupError:
     - '/usr/local/lib/nltk_data'
 **********************************************************************
 
+2025-01-28 20:51:32,062 - app.routes.chat_routes - INFO - Creating new session: demo-session
+2025-01-28 20:58:34,560 - app.routes.chat_routes - INFO - Creating new session: demo-session
+2025-01-28 20:58:34,659 - app.routes.chat_routes - ERROR - Invalid response format from response generator
+2025-01-28 20:58:41,621 - app.routes.chat_routes - ERROR - Invalid response format from response generator
+2025-01-28 21:08:08,398 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
+2025-01-28 21:22:19,397 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
+2025-01-28 21:30:24,831 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
+2025-01-28 21:30:24,837 - app.routes.chat_routes - ERROR - Error in chat endpoint: 'CrisisHandler' object has no attribute 'is_crisis_message'
+2025-01-28 21:30:24,838 - app.routes.chat_routes - ERROR - Traceback (most recent call last):
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 49, in chat
+    response_data = _process_message(handler, message)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 71, in _process_message
+    response = handler.generate_response(message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/services/conversation_handler.py", line 16, in generate_response
+    if self.crisis_handler.is_crisis_message(message):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'CrisisHandler' object has no attribute 'is_crisis_message'. Did you mean: 'analyze_crisis_message'?
+
+2025-01-28 21:35:37,689 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
+2025-01-28 21:35:37,692 - app.routes.chat_routes - ERROR - Error in chat endpoint: type object 'MessageIntent' has no attribute 'STRESS'
+2025-01-28 21:35:37,694 - app.routes.chat_routes - ERROR - Traceback (most recent call last):
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 46, in chat
+    handler = _get_or_create_handler(session_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 65, in _get_or_create_handler
+    conversation_handlers[session_id] = ConversationHandler()
+                                        ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/services/conversation_handler.py", line 10, in __init__
+    self.analyzer = MessageAnalyzer()
+                    ^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/services/message_analyzer.py", line 9, in __init__
+    self.patterns = get_patterns()
+                    ^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/services/patterns.py", line 153, in get_patterns
+    intent=MessageIntent.STRESS,
+           ^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'MessageIntent' has no attribute 'STRESS'
+
+2025-01-28 21:38:49,954 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
