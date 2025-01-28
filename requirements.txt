@@ -1,0 +1,5 @@
+Flask==2.0.1
+transformers==4.11.3
+nltk==3.6.2
+numpy==1.21.2
+torch==1.10.0  # Or tensorflow==2.7.0

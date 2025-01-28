@@ -1,0 +1,31 @@
+
+{
+    "general": {
+        "validation_and_support": [
+            "I hear that you're feeling this way. It's okay to feel like this sometimes.",
+            "Your feelings are valid, and it's important to acknowledge them."
+        ],
+        "exploration": [
+            "Can you tell me more about what's been on your mind?",
+            "What do you think is causing these feelings?"
+        ],
+        "reinforcement": [
+            "You're doing great by reaching out. Keep going!",
+            "It's brave of you to share this. Thank you for trusting me."
+        ]
+    },
+    "anxiety": {
+        "validation_and_support": [
+            "Anxiety can be overwhelming, but you're not alone in this.",
+            "It's okay to feel anxious. Let's work through it together."
+        ],
+        "exploration": [
+            "What situations tend to make you feel most anxious?",
+            "How does your body feel when you're anxious?"
+        ],
+        "reinforcement": [
+            "You're taking steps to manage your anxiety, and that's a big deal.",
+            "Remember, anxiety doesn't define you. You're stronger than it."
+        ]
+    }
+}
