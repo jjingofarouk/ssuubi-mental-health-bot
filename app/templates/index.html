@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,10 +8,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #14b8a6; /* Teal */
-            --secondary-color: #0d9488; /* Darker teal */
-            --accent-color: #0f766e; /* Even darker teal */
-            --background-color: #f0fdfa; /* Light teal background */
+            --primary-color: #14b8a6;
+            --secondary-color: #0d9488;
+            --accent-color: #0f766e;
+            --background-color: #f0fdfa;
         }
 
         body {
@@ -41,9 +40,9 @@
         }
 
         .bot {
-            background-color: #f0fdfa; /* Light teal background for bot messages */
-            color: #0f766e; /* Dark teal text */
-            border: 1px solid #ccfbf1; /* Light teal border */
+            background-color: #f0fdfa;
+            color: #0f766e;
+            border: 1px solid #ccfbf1;
         }
 
         @keyframes fadeIn {
@@ -60,7 +59,7 @@
         .typing-dot {
             width: 6px;
             height: 6px;
-            background: #0d9488; /* Teal dots */
+            background: #0d9488;
             border-radius: 50%;
             animation: typing 1.4s infinite;
         }
@@ -83,62 +82,151 @@
             color: var(--secondary-color);
         }
 
-        .mood-indicator {
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.875rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background-color: #ccfbf1; /* Light teal background */
-            color: #0f766e; /* Dark teal text */
-        }
-
         .input-container {
             background: white;
-            border: 2px solid #ccfbf1; /* Light teal border */
+            border: 2px solid #ccfbf1;
             transition: border-color 0.2s;
         }
 
         .input-container:focus-within {
             border-color: var(--primary-color);
         }
+
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .sidebar-overlay {
+            background-color: rgba(0, 0, 0, 0.3);
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+        }
+
+        .nav-item {
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(20, 184, 166, 0.1);
+        }
+
+        .mood-button {
+            transition: all 0.2s ease;
+        }
+
+        .mood-button:hover {
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-teal-50 to-teal-100">
-    <div class="container mx-auto px-4 py-8">
-        <!-- Header -->
-        <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-teal-600 mb-2">Ssuubi</h1>
-            <p class="text-gray-600">Your Compassionate Mental Health Support Assistant</p>
-        </header>
+    <!-- Sidebar Overlay -->
+    <div id="overlay" class="sidebar-overlay fixed inset-0 z-30 hidden"></div>
 
-        <!-- Main Chat Interface -->
-        <div class="max-w-4xl mx-auto">
-            <div class="chat-container rounded-2xl shadow-lg p-4">
-                <!-- Chat Header -->
-                <div class="border-b pb-4 mb-4">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
-                            <span class="font-medium text-gray-700">Active Session</span>
-                        </div>
-                        <div class="mood-indicator">
-                            <i class="fas fa-brain text-teal-600"></i>
-                            <span class="ml-1">Sentiment Analysis Active</span>
-                        </div>
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu" class="md:hidden fixed top-4 left-4 z-50 bg-teal-600 text-white p-2 rounded-lg">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar bg-white w-64 h-screen fixed md:relative shadow-lg z-40 overflow-y-auto">
+            <div class="p-4 border-b">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-2xl font-bold text-teal-600">Ssuubi</h1>
+                    <button id="close-sidebar" class="md:hidden text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- New Chat Button -->
+            <div class="p-4">
+                <button class="w-full bg-teal-600 text-white rounded-lg py-2 px-4 flex items-center justify-center gap-2 hover:bg-teal-700 transition-colors">
+                    <i class="fas fa-plus"></i>
+                    New Chat
+                </button>
+            </div>
+
+            <!-- Navigation Items -->
+            <nav class="p-4">
+                <div class="space-y-2">
+                    <a href="#" class="nav-item flex items-center gap-3 text-gray-700 p-2 rounded-lg">
+                        <i class="fas fa-history"></i>
+                        <span>Chat History</span>
+                    </a>
+                    <a href="#" class="nav-item flex items-center gap-3 text-gray-700 p-2 rounded-lg">
+                        <i class="fas fa-book"></i>
+                        <span>Resources</span>
+                    </a>
+                    <a href="#" class="nav-item flex items-center gap-3 text-gray-700 p-2 rounded-lg">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <span>Self-Care Tools</span>
+                    </a>
+                    <a href="#" class="nav-item flex items-center gap-3 text-gray-700 p-2 rounded-lg">
+                        <i class="fas fa-phone"></i>
+                        <span>Crisis Support</span>
+                    </a>
+                    <div class="border-t my-4"></div>
+                    <a href="#" class="nav-item flex items-center gap-3 text-gray-700 p-2 rounded-lg">
+                        <i class="fas fa-comment-dots"></i>
+                        <span>Previous Chat 1</span>
+                    </a>
+                    <a href="#" class="nav-item flex items-center gap-3 text-gray-700 p-2 rounded-lg">
+                        <i class="fas fa-comment-dots"></i>
+                        <span>Previous Chat 2</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- Settings Section -->
+            <div class="absolute bottom-0 left-0 right-0 p-4 border-t bg-white">
+                <a href="#" class="nav-item flex items-center gap-3 text-gray-700 p-2 rounded-lg">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col h-screen overflow-hidden md:ml-0">
+            <!-- Mood Check -->
+            <div class="bg-white border-b px-4 py-3">
+                <div class="flex items-center justify-between mb-3">
+                    <p class="text-gray-600">How are you feeling today?</p>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                        <span class="text-sm text-gray-600">Active Session</span>
                     </div>
                 </div>
+                <div class="flex gap-2 overflow-x-auto pb-2">
+                    <button class="mood-button px-4 py-2 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100">😊 Good</button>
+                    <button class="mood-button px-4 py-2 bg-yellow-50 text-yellow-600 rounded-full hover:bg-yellow-100">😐 Okay</button>
+                    <button class="mood-button px-4 py-2 bg-red-50 text-red-600 rounded-full hover:bg-red-100">😔 Not Great</button>
+                    <button class="mood-button px-4 py-2 bg-purple-50 text-purple-600 rounded-full hover:bg-purple-100">😴 Tired</button>
+                    <button class="mood-button px-4 py-2 bg-green-50 text-green-600 rounded-full hover:bg-green-100">🤔 Unsure</button>
+                </div>
+            </div>
 
+            <!-- Chat Interface -->
+            <div class="flex-1 overflow-hidden flex flex-col p-4">
                 <!-- Chat Messages -->
-                <div id="chat-box" class="h-96 overflow-y-auto mb-4 p-4">
+                <div id="chat-box" class="flex-1 overflow-y-auto mb-4">
                     <div class="message bot">
                         Hello! 👋 I'm Ssuubi, your mental health support assistant. How are you feeling today?
                     </div>
                 </div>
 
                 <!-- Input Area -->
-                <div class="input-container rounded-xl p-3">
+                <div class="input-container rounded-xl p-3 mx-auto max-w-4xl w-full">
                     <div class="flex items-center gap-3">
                         <input 
                             id="user-input"
@@ -155,43 +243,47 @@
                     </div>
                 </div>
 
-                <!-- Features List -->
-                <div class="mt-6 grid grid-cols-2 gap-4 text-sm text-gray-600">
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-brain text-teal-600"></i>
-                        <span>Advanced Sentiment Analysis</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-shield-alt text-teal-600"></i>
-                        <span>Crisis Detection</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-heart text-teal-600"></i>
-                        <span>Emotional Support</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-hands-helping text-teal-600"></i>
-                        <span>Coping Strategies</span>
-                    </div>
-                </div>
+                <!-- Footer -->
+                <footer class="text-center mt-4 text-sm text-gray-500">
+                    <p>If you're experiencing a crisis, please reach out:</p>
+                    <p class="mt-2">
+                        <a href="tel:988" class="resource-link">Crisis Hotline: 988</a>
+                        <span class="mx-2">|</span>
+                        <a href="#" class="resource-link">Text HOME to 741741</a>
+                    </p>
+                </footer>
             </div>
-
-            <!-- Footer -->
-            <footer class="text-center mt-8 text-sm text-gray-500">
-                <p>If you're experiencing a crisis, please reach out:</p>
-                <p class="mt-2">
-                    <a href="tel:1-800-273-8255" class="resource-link">Crisis Hotline: 1-800-273-8255</a>
-                    <span class="mx-2">|</span>
-                    <span>Text HOME to 741741</span>
-                </p>
-            </footer>
-        </div>
+        </main>
     </div>
 
     <script>
         const chatBox = document.getElementById('chat-box');
         const userInput = document.getElementById('user-input');
         const sendBtn = document.getElementById('send-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeSidebarBtn = document.getElementById('close-sidebar');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('hidden');
+        }
+
+        // Mobile menu handlers
+        mobileMenu.addEventListener('click', toggleSidebar);
+        closeSidebarBtn.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && 
+                !sidebar.contains(e.target) && 
+                !mobileMenu.contains(e.target)) {
+                sidebar.classList.remove('active');
+                overlay.classList.add('hidden');
+            }
+        });
 
         function addMessage(sender, message) {
             const messageElement = document.createElement('div');
@@ -205,11 +297,9 @@
             const message = userInput.value.trim();
             if (!message) return;
 
-            // Add user message
             addMessage('user', message);
             userInput.value = '';
 
-            // Show typing indicator
             const typingIndicator = document.createElement('div');
             typingIndicator.classList.add('message', 'bot');
             typingIndicator.innerHTML = `
@@ -234,11 +324,7 @@
                 });
 
                 const data = await response.json();
-                
-                // Remove typing indicator
                 chatBox.removeChild(typingIndicator);
-                
-                // Add bot response
                 addMessage('bot', data.message);
 
             } catch (error) {
@@ -253,6 +339,14 @@
             if (e.key === 'Enter') {
                 handleUserInput();
             }
+        });
+
+        // Handle mood buttons
+        document.querySelectorAll('.mood-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const mood = button.textContent.split(' ')[1];
+                addMessage('bot', `Thank you for sharing that you're feeling ${mood}. Would you like to talk about it?`);
+            });
         });
     </script>
 </body>
