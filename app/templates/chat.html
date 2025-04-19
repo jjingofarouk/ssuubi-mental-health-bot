@@ -7,11 +7,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #000000;
-            --secondary-color: #4B5563;
-            --background-color: #FFFFFF;
-            --input-bg: #F9FAFB;
-            --border-color: #E5E7EB;
+            --primary-color: #D1D5DB; /* Light gray for text */
+            --secondary-color: #9CA3AF; /* Gray-400 for secondary text */
+            --background-color: #202123; /* Dark gray background */
+            --input-bg: #343541; /* Darker gray for input */
+            --border-color: #4B5563; /* Gray-600 for borders */
+            --accent-color: #10A37F; /* Subtle green for focus */
         }
 
         body {
@@ -53,13 +54,13 @@
         }
 
         .user {
-            background-color: #F3F4F6;
+            background-color: #343541;
             color: var(--primary-color);
             margin-left: auto;
         }
 
         .bot {
-            background-color: #F9FAFB;
+            background-color: #2D2E33;
             color: var(--primary-color);
             border: 1px solid var(--border-color);
         }
@@ -84,11 +85,11 @@
         }
 
         #user-input::placeholder {
-            color: #9CA3AF; /* Gray-400 */
+            color: #6B7280; /* Gray-500 */
         }
 
         #send-btn {
-            background: #F3F4F6;
+            background: #343541;
             color: var(--primary-color);
             padding: 0.5rem 1rem;
             border-radius: 8px;
@@ -96,7 +97,7 @@
         }
 
         #send-btn:hover {
-            background: #E5E7EB;
+            background: #4B5563;
         }
 
         .typing-indicator {
