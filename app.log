@@ -299,3 +299,4 @@ AttributeError: 'CrisisHandler' object has no attribute 'is_crisis_message'. Did
 AttributeError: type object 'MessageIntent' has no attribute 'STRESS'
 
 2025-01-28 21:38:49,954 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
+2025-04-19 20:50:07,035 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
