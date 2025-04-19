@@ -302,3 +302,35 @@ AttributeError: type object 'MessageIntent' has no attribute 'STRESS'
 2025-04-19 20:50:07,035 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
 2025-04-19 22:31:10,397 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
 2025-04-19 22:37:41,380 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
+2025-04-19 23:21:05,516 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
+2025-04-19 23:21:15,921 - app.services.response_generator - WARNING - mental_health_responses.json not found, using empty responses
+2025-04-19 23:21:24,732 - app.routes.chat_routes - ERROR - Error in chat endpoint: ConversationHandler.generate_response() missing 2 required positional arguments: 'session_id' and 'user_id'
+2025-04-19 23:21:24,732 - app.routes.chat_routes - ERROR - Traceback (most recent call last):
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 49, in chat
+    response_data = _process_message(handler, message)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 71, in _process_message
+    response = handler.generate_response(message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ConversationHandler.generate_response() missing 2 required positional arguments: 'session_id' and 'user_id'
+
+2025-04-19 23:21:39,312 - app.routes.chat_routes - ERROR - Error in chat endpoint: ConversationHandler.generate_response() missing 2 required positional arguments: 'session_id' and 'user_id'
+2025-04-19 23:21:39,313 - app.routes.chat_routes - ERROR - Traceback (most recent call last):
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 49, in chat
+    response_data = _process_message(handler, message)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 71, in _process_message
+    response = handler.generate_response(message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ConversationHandler.generate_response() missing 2 required positional arguments: 'session_id' and 'user_id'
+
+2025-04-19 23:21:46,716 - app.routes.chat_routes - ERROR - Error in chat endpoint: ConversationHandler.generate_response() missing 2 required positional arguments: 'session_id' and 'user_id'
+2025-04-19 23:21:46,716 - app.routes.chat_routes - ERROR - Traceback (most recent call last):
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 49, in chat
+    response_data = _process_message(handler, message)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 71, in _process_message
+    response = handler.generate_response(message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ConversationHandler.generate_response() missing 2 required positional arguments: 'session_id' and 'user_id'
+
