@@ -437,6 +437,68 @@ MessagePattern(
         ]
     ),
     MessagePattern(
+        intent=MessageIntent.RELATIONSHIP,
+        patterns=[
+            re.compile(r'(feel(?:ing)?|am)\s*(very|really|so)?\s*(betrayed|hurt)\s*by\s*(partner|friend|family)', re.IGNORECASE),
+            re.compile(r'breakup|divorce', re.IGNORECASE),
+            re.compile(r'fight\s*with\s*(spouse|friend)', re.IGNORECASE),
+            re.compile(r'no\s*one\s*understands\s*me', re.IGNORECASE),
+            re.compile(r'conflict\s*with\s*(family|partner)', re.IGNORECASE),
+        ],
+        responses=[
+            {
+                "message": "It sounds like your relationships are weighing on you. That’s really tough.",
+                "followup": "Can you share more about what happened?",
+                "techniques": ["communication strategies", "journaling emotions"]
+            }
+        ]
+    ),
+    MessagePattern(
+        intent=MessageIntent.GRIEF,
+        patterns=[
+            re.compile(r'(feel(?:ing)?|am)\s*(very|really|so)?\s*(heartbroken|sorrowful|devastated)', re.IGNORECASE),
+            re.compile(r'loss\s*of\s*(loved\s*one|someone)', re.IGNORECASE),
+            re.compile(r'mourning|grieving', re.IGNORECASE),
+            re.compile(r'can\'t\s*move\s*on', re.IGNORECASE),
+        ],
+        responses=[
+            {
+                "message": "I’m so sorry for your loss. Grief can feel overwhelming.",
+                "followup": "Would you like to talk about your loved one?",
+                "techniques": ["grief journaling", "memorial activities"]
+            }
+        ]
+    ),
+    MessagePattern(
+        intent=MessageIntent.SLEEP,
+        patterns=[
+            re.compile(r'can\'t\s*sleep|insomnia', re.IGNORECASE),
+            re.compile(r'up\s*all\s*night', re.IGNORECASE),
+            re.compile(r'trouble\s*(falling|staying)\s*asleep', re.IGNORECASE),
+            re.compile(r'feeling\s*tired\s*all\s*the\s*time', re.IGNORECASE),
+        ],
+        responses=[
+            {
+                "message": "Sleep struggles can be exhausting. Let’s find ways to help.",
+                "followup": "What’s been keeping you up?",
+                "techniques": ["sleep hygiene tips", "relaxation exercises"]
+            }
+        ]
+    ),
+    # Update ANXIETY responses for personalization
+    MessagePattern(
+        intent=MessageIntent.ANXIETY,
+        patterns=[...],  # Keep existing patterns
+        responses=[
+            {
+                "message": "I hear you’re feeling {intensity_words} anxious{trigger? about {trigger}}. That’s really tough.",
+                "followup": "Can you tell me what’s been triggering this?",
+                "techniques": ["deep breathing", "grounding exercises"]
+            },
+            # Add more responses
+        ]
+    ),
+    MessagePattern(
         intent=MessageIntent.UNKNOWN,
         patterns=[
             re.compile(r'.*', re.IGNORECASE),  # Catch-all pattern
