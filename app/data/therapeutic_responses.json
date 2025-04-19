@@ -1,31 +1,403 @@
-
 {
-    "general": {
-        "validation_and_support": [
-            "I hear that you're feeling this way. It's okay to feel like this sometimes.",
-            "Your feelings are valid, and it's important to acknowledge them."
-        ],
-        "exploration": [
-            "Can you tell me more about what's been on your mind?",
-            "What do you think is causing these feelings?"
-        ],
-        "reinforcement": [
-            "You're doing great by reaching out. Keep going!",
-            "It's brave of you to share this. Thank you for trusting me."
-        ]
-    },
-    "anxiety": {
-        "validation_and_support": [
-            "Anxiety can be overwhelming, but you're not alone in this.",
-            "It's okay to feel anxious. Let's work through it together."
-        ],
-        "exploration": [
-            "What situations tend to make you feel most anxious?",
-            "How does your body feel when you're anxious?"
-        ],
-        "reinforcement": [
-            "You're taking steps to manage your anxiety, and that's a big deal.",
-            "Remember, anxiety doesn't define you. You're stronger than it."
-        ]
-    }
+  "general": {
+    "validation_and_support": [
+      "I hear that you're feeling this way. It's okay to feel like this sometimes, and I'm here to listen.",
+      "Your feelings are valid, and it's important to acknowledge them without judgment.",
+      "Whatever you're feeling right now, it's okay. You're not alone in this moment.",
+      "You don’t have to go through this alone. Let’s talk about it together when you’re ready.",
+      "It’s completely normal to have tough days. You're doing the best you can, and that’s enough.",
+      "Even if it feels like no one understands, I want you to know I’m here to listen with care.",
+      "It’s okay to slow down and just breathe. You're not a burden, and your feelings matter.",
+      "I’m proud of you for showing up today, even if it feels hard.",
+      "Your emotions are like waves—they’ll ebb and flow, and I’ll be here through it all.",
+      "It’s okay to not have all the answers right now. Let’s take it one step at a time."
+    ],
+    "exploration": [
+      "Can you tell me more about what's been on your mind lately?",
+      "What do you think might be contributing to how you’re feeling?",
+      "When did you first notice these feelings starting to surface?",
+      "Has anything changed in your life recently that feels significant?",
+      "What are some things that usually help you feel better or more grounded?",
+      "What thoughts have been coming up for you most often?",
+      "Is there someone you trust that you've talked to about this, or is this your first time sharing?",
+      "Are there moments in your day when you feel a little lighter? What’s happening then?",
+      "What’s one thing that’s been weighing on you the most right now?",
+      "Does it feel like these emotions are tied to something specific, or are they more general?"
+    ],
+    "reinforcement": [
+      "You're doing great by reaching out. Keep going—you’ve got this!",
+      "It's brave of you to share this. Thank you for trusting me with your feelings.",
+      "You’ve taken a meaningful step by opening up—keep being kind to yourself.",
+      "Healing takes time, and you're already on your way, even if it’s slow.",
+      "You are showing strength just by acknowledging your feelings—don’t underestimate that.",
+      "Small steps matter. You're moving forward even when it doesn't feel like it.",
+      "Your effort matters, even when it feels invisible. You’re doing more than you realize.",
+      "You’re not defined by this moment—you’re so much more, and you’re growing every day.",
+      "Every time you open up, you’re building resilience. That’s powerful.",
+      "You’re allowed to take up space and feel what you feel. You’re enough."
+    ],
+    "coping_strategies": [
+      "Would you like to try a breathing exercise together to help you feel more centered?",
+      "Sometimes writing your thoughts down can help organize them. Have you tried journaling, or would you like some prompts?",
+      "Taking a short walk or stretching can help clear your mind. Would that be helpful now?",
+      "Listening to music, drawing, or doing something creative can bring calm. What helps you relax?",
+      "Let’s try identifying one small thing you can do today just for yourself—what comes to mind?",
+      "Grounding exercises can help you stay in the moment. Would you like to try one now?",
+      "Sometimes sipping water slowly or holding something comforting can help. What’s nearby that feels soothing?",
+      "Would it help to make a small plan for the next hour, just to feel more in control?",
+      "Let’s try a body scan—gently noticing how each part of your body feels without judgment.",
+      "Reading or repeating affirmations can feel grounding. Would you like me to share a few?"
+    ],
+    "grounding_prompts": [
+      "Can you name 5 things you see, 4 you can touch, 3 you can hear, 2 you can smell, and 1 you can taste?",
+      "Take a deep breath. In through your nose… and out through your mouth. Let’s do that again, nice and slow.",
+      "Wiggle your toes and feel the ground beneath you. You’re here, and you’re safe.",
+      "Look around you—what’s something nearby that makes you feel calm or comforted?",
+      "Let’s pause. Place your hand on your chest and notice your breath. You’re okay in this moment.",
+      "Can you focus on one sound around you? Describe it to yourself in detail for a moment.",
+      "Gently press your hands together and notice the warmth. You’re present, and you’re okay.",
+      "What’s one object you can hold? Describe its texture, weight, or temperature.",
+      "Let’s try naming 3 colors you see around you. Take your time to really notice them.",
+      "Imagine your feet rooted to the ground like a tree. Feel that strength holding you steady."
+    ],
+    "motivation": [
+      "You’ve made it through tough moments before, and you’ll get through this too.",
+      "Even the smallest step forward counts—give yourself credit for trying.",
+      "You don’t need to do everything at once. Just one small action today is enough.",
+      "You’re capable of amazing things, even when it feels hard to see it right now.",
+      "Your journey is unique, and every effort you make is building your strength.",
+      "You’re not starting from scratch—you’re building on all the resilience you already have.",
+      "Take a moment to celebrate how far you’ve come, even if it feels small.",
+      "You’re writing your story, and every choice to keep going adds a new page.",
+      "You have the power to shape your day, even in tiny ways. What’s one thing you’d like to try?",
+      "You’re stronger than you know, and today is another chance to prove it to yourself."
+    ],
+    "self_compassion": [
+      "Be gentle with yourself—you’re doing the best you can in this moment.",
+      "You deserve kindness, especially from yourself, right now.",
+      "It’s okay to not be perfect. You’re human, and that’s beautiful.",
+      "What would you say to a friend feeling this way? Can you offer that same compassion to yourself?",
+      "You’re allowed to rest, to feel, and to take up space. You matter.",
+      "Mistakes or struggles don’t define you—they’re just part of your story.",
+      "You’re worthy of love and care, exactly as you are today.",
+      "Give yourself permission to feel without judgment. You’re enough.",
+      "Your heart is doing its best, and that’s something to honor.",
+      "You don’t have to earn kindness—you deserve it just for being you."
+    ]
+  },
+
+  "anxiety": {
+    "validation_and_support": [
+      "Anxiety can be overwhelming, but you're not alone in this. I’m here with you.",
+      "It's okay to feel anxious. Let’s work through it together, one step at a time.",
+      "Many people experience anxiety—what you're going through is more common than you think.",
+      "It's okay if your mind feels like it's racing. Let’s slow things down together.",
+      "I understand that your anxiety feels very real right now, and that matters.",
+      "Your anxiety is trying to protect you, even if it feels heavy. You’re safe here.",
+      "It’s okay to feel this way—your body’s just sounding an alarm, and we can soothe it.",
+      "You’re not your anxiety. It’s just a visitor, and we can help it pass.",
+      "Even when anxiety feels loud, you’re still in control of this moment.",
+      "I’m here to help you navigate this. You don’t have to face it on your own."
+    ],
+    "exploration": [
+      "What situations or thoughts tend to make you feel most anxious?",
+      "How does your body feel when you're anxious? Any tightness or racing sensations?",
+      "Can you remember your last anxious moment and what helped you get through it?",
+      "What do you usually do when anxiety starts to build? Does anything help?",
+      "Are there specific thoughts that repeat when you feel anxious? Can you share one?",
+      "What are some things you’ve noticed trigger your anxiety, even if they’re small?",
+      "Does your anxiety feel tied to something specific, like a place or event?",
+      "When was the last time you felt calm? What was different about that moment?",
+      "Is there a time of day when your anxiety feels louder? What’s happening then?",
+      "Do you notice any patterns in when or why your anxiety shows up?"
+    ],
+    "reinforcement": [
+      "You're taking steps to manage your anxiety, and that's a big deal. Keep it up!",
+      "Remember, anxiety doesn't define you. You're stronger than it, even now.",
+      "You’ve made it through anxious moments before—you can get through this too.",
+      "You are capable of calming your mind, even when it feels difficult.",
+      "Facing your anxiety takes courage, and you're doing that right now. That’s huge.",
+      "Every breath you take is a reminder of your strength. You’re doing this.",
+      "You’re learning to navigate your anxiety, and that’s a powerful skill.",
+      "Even when it feels intense, you’re still here, showing up. That’s resilience.",
+      "You’re not alone in this, and you’re building tools to handle it every day.",
+      "Your effort to face anxiety is a victory, no matter how small it feels."
+    ],
+    "coping_strategies": [
+      "Let’s try breathing together: inhale for 4 seconds, hold for 4, exhale for 4, and pause for 4.",
+      "Would it help to visualize a safe, calm place right now? Imagine it in as much detail as you can.",
+      "Try tensing your muscles for 5 seconds and then releasing. Let’s go through your body slowly.",
+      "Let’s list 3 things you're grateful for right now. Shifting your focus can ease the mind.",
+      "Would you like to try a grounding exercise to help you feel more present?",
+      "Sometimes repeating a calming phrase helps. Try: 'This feeling will pass, and I am safe.'",
+      "Let’s break down what’s on your mind into smaller parts. What’s one thing we can focus on?",
+      "Sipping cold water slowly can help reset your nervous system. Want to try it?",
+      "Let’s try a quick distraction—name 5 things you love, like foods or places.",
+      "Progressive muscle relaxation can help. Start with your toes and work up—tense, then relax."
+    ],
+    "grounding_prompts": [
+      "Take a moment to notice your feet on the floor. Feel the stability beneath you.",
+      "Find an object nearby. Focus on its color, shape, and texture for 30 seconds.",
+      "Let’s count backward slowly from 10 together, taking a breath between each number.",
+      "Can you describe your current surroundings in detail? Start with one small thing.",
+      "What are three things you can see right now that make you feel at ease?",
+      "Press your palms together and focus on the sensation. You’re here, and you’re okay.",
+      "Listen for the quietest sound in the room. Can you describe it?",
+      "Take a slow sip of water or air and notice how it feels going down.",
+      "Can you name 3 textures you can feel right now, like your clothes or a surface?",
+      "Imagine a gentle wave washing over you, carrying tension away. Let’s picture it."
+    ]
+  },
+
+  "depression": {
+    "validation_and_support": [
+      "Feeling this way can be so heavy, and I’m here to sit with you through it.",
+      "It’s okay to feel down—your emotions are valid, and you don’t have to hide them.",
+      "Depression can make everything feel dim, but you’re not alone in this darkness.",
+      "You don’t have to carry this weight by yourself. I’m here to listen.",
+      "It’s okay if today feels hard. You’re doing enough just by being here.",
+      "Your feelings matter, even when depression makes it hard to see that.",
+      "You’re not broken—depression is just a cloud, and we can find moments of light.",
+      "Even on your hardest days, you’re still worthy of care and kindness.",
+      "I know it might feel endless, but you’ve made it through tough days before.",
+      "You’re not alone, even when depression makes it feel that way. I’m right here."
+    ],
+    "exploration": [
+      "What’s been the hardest part of feeling this way for you?",
+      "Are there moments when the depression feels a little lighter? What’s happening then?",
+      "When did you start noticing these feelings becoming more intense?",
+      "Is there something specific that’s been on your mind, weighing you down?",
+      "What does a typical day feel like for you right now?",
+      "Are there activities you used to enjoy that feel harder to do now?",
+      "What thoughts come up most often when you’re feeling low?",
+      "Have you been able to share how you’re feeling with anyone close to you?",
+      "Does anything help, even a little, when you’re feeling this way?",
+      "What’s one thing that feels overwhelming to you right now?"
+    ],
+    "reinforcement": [
+      "You’re here, and that’s a huge accomplishment. Give yourself credit for it.",
+      "You’re stronger than you feel right now, and you’re not alone in this.",
+      "Every small step you take is a victory, even if it’s just reaching out here.",
+      "You’re navigating something really tough, and that takes incredible resilience.",
+      "You don’t have to be ‘fixed’—you’re enough, just as you are.",
+      "Your presence matters, even when depression tries to tell you otherwise.",
+      "You’re building strength every time you face these feelings head-on.",
+      "You’ve survived every hard day so far, and that’s proof of your courage.",
+      "Opening up like this is a sign of your inner strength. Keep going.",
+      "You’re not defined by depression—you’re so much more, and you’re enough."
+    ],
+    "coping_strategies": [
+      "Let’s try setting one small goal for today, like drinking water or stepping outside. What feels doable?",
+      "Sometimes a warm shower or cozy blanket can feel soothing. What’s something comforting you could try?",
+      "Would it help to listen to a favorite song or watch something light for a few minutes?",
+      "Let’s write down one thing you’re proud of, no matter how small. What comes to mind?",
+      "Breaking tasks into tiny steps can help. What’s one small thing you could do right now?",
+      "Sometimes talking to someone trusted can lift the weight. Is there someone you feel safe with?",
+      "Let’s try a gratitude exercise: name one thing, big or small, that feels okay today.",
+      "Moving your body even a little can help. Want to try stretching or swaying to music?",
+      "Would it help to create a small routine, like making tea or tidying one spot?",
+      "Let’s imagine a comforting memory or place. Can you describe it to me?"
+    ],
+    "grounding_prompts": [
+      "Notice your breath for a moment. In and out, slow and steady. You’re here.",
+      "Can you touch something soft or smooth nearby? Describe how it feels.",
+      "Look around—what’s one thing in your space that feels familiar or safe?",
+      "Let’s name 3 things you can see that remind you of a good moment.",
+      "Place your hand on your heart and feel its rhythm. You’re alive, and you’re enough.",
+      "Can you focus on one scent around you, like soap or fresh air? What’s it like?",
+      "Take a slow stretch and notice how your body feels as you move.",
+      "What’s one sound you can hear right now? Let it anchor you for a moment.",
+      "Hold an object and describe its weight or temperature. You’re connected to this moment.",
+      "Let’s count 5 slow breaths together, letting each one ground you."
+    ]
+  },
+
+  "loneliness": {
+    "validation_and_support": [
+      "Feeling lonely can be so hard, and it’s okay to feel this way sometimes.",
+      "You’re not alone in feeling lonely—your feelings are valid, and I’m here.",
+      "It’s okay to crave connection. You deserve to feel seen and cared for.",
+      "Loneliness can feel heavy, but you’re reaching out, and that’s a brave step.",
+      "Even when it feels like no one’s there, I’m here to listen and support you.",
+      "Your heart is longing for connection, and that’s a beautiful part of being human.",
+      "You’re worthy of love and belonging, even when loneliness makes it hard to see.",
+      "It’s okay to feel this way—it doesn’t mean you’re alone forever.",
+      "I hear how isolating this feels, and I’m here to sit with you through it.",
+      "You matter, and your presence in the world makes a difference."
+    ],
+    "exploration": [
+      "What’s been making you feel lonely lately? Can you share a bit more?",
+      "Are there moments when you feel more connected? What’s different then?",
+      "When did you start noticing this sense of loneliness creeping in?",
+      "Is there someone you’ve wanted to reach out to but haven’t? What’s holding you back?",
+      "What does connection look like for you when you’re feeling your best?",
+      "Are there places or activities that help you feel less alone?",
+      "What thoughts come up when you’re feeling lonely? Any recurring ones?",
+      "Have you felt this way before? What helped you through it last time?",
+      "Is there a specific kind of connection you’re craving right now?",
+      "What’s one thing you wish others knew about how you’re feeling?"
+    ],
+    "reinforcement": [
+      "Reaching out here is a brave step toward connection. You’re doing great!",
+      "You’re worthy of love and connection, and you’re taking steps to find it.",
+      "Loneliness doesn’t define you—it’s just a moment, and you’re moving through it.",
+      "You’re building bridges by sharing your feelings, and that’s powerful.",
+      "Your desire for connection shows how much you value relationships—that’s a strength.",
+      "You’ve got a spark that draws people to you, even if it’s hard to see now.",
+      "Every time you open up, you’re creating space for meaningful connections.",
+      "You’re not alone in this, and you’re already taking steps to feel more connected.",
+      "Your courage to face loneliness is inspiring. Keep going—you’re enough.",
+      "You’re creating your own path to connection, one step at a time."
+    ],
+    "coping_strategies": [
+      "Would it help to write a message to someone you care about, even if you don’t send it?",
+      "Sometimes connecting with yourself, like through journaling, can ease loneliness. Want to try?",
+      "Let’s think of one small way to connect today, like texting a friend or joining a group.",
+      "Doing something kind for yourself can feel like a hug. What’s one nice thing you can do?",
+      "Would you like to explore online communities or forums where you might meet others?",
+      "Listening to a podcast or watching a show can feel like company. Any favorites?",
+      "Let’s plan a small outing, like visiting a café or park, to feel part of the world.",
+      "Sometimes pets or nature can ease loneliness. Do you have access to either?",
+      "Let’s try a self-compassion exercise: what’s one kind thing you can say to yourself?",
+      "Volunteering or helping someone can create connection. Is that something you’d consider?"
+    ],
+    "grounding_prompts": [
+      "Look around—what’s one thing in your space that feels like ‘you’?",
+      "Take a deep breath and imagine someone you love sitting with you. You’re not alone.",
+      "Can you name 3 things you’re grateful for, like a memory or a small joy?",
+      "Hold something comforting, like a blanket or mug, and describe how it feels.",
+      "Let’s focus on your breath for a moment. In and out—you’re connected to this moment.",
+      "What’s one sound you can hear that feels soothing, like music or birds?",
+      "Imagine a warm light surrounding you, reminding you you’re worthy of connection.",
+      "Can you describe a favorite memory of feeling connected to someone?",
+      "Press your feet into the ground and feel the earth supporting you.",
+      "Let’s name 3 things you love about yourself, big or small."
+    ]
+  },
+
+  "stress": {
+    "validation_and_support": [
+      "Stress can feel like a lot to carry, and it’s okay to feel overwhelmed sometimes.",
+      "You’re dealing with a lot, and I’m here to help you sort through it.",
+      "It’s normal to feel stressed when life gets heavy. You’re not alone in this.",
+      "Your stress is real, and it’s okay to take a moment to breathe.",
+      "I hear how much is on your plate, and I’m here to support you through it.",
+      "You’re doing your best in a tough situation, and that’s something to recognize.",
+      "Stress can make everything feel urgent, but you’re safe to pause here.",
+      "You don’t have to handle everything at once. Let’s take it one step at a time.",
+      "Your feelings of stress matter, and you deserve space to process them.",
+      "You’re navigating a lot, and I’m proud of you for keeping going."
+    ],
+    "exploration": [
+      "What’s been the biggest source of stress for you lately?",
+      "How does stress show up in your body or mind? Any specific sensations?",
+      "When do you notice your stress peaking? Is it tied to certain moments?",
+      "What’s one thing you wish you could let go of to feel less stressed?",
+      "Are there moments when you feel less stressed? What’s happening then?",
+      "What do you usually do when stress starts to build? Does anything help?",
+      "Is there a specific task or situation that feels overwhelming right now?",
+      "Have you been able to share your stress with anyone? What was that like?",
+      "What’s one thing that feels out of your control right now?",
+      "Are there patterns in when or why stress shows up for you?"
+    ],
+    "reinforcement": [
+      "You’re tackling a lot, and just reaching out here is a win.",
+      "You’re stronger than your stress, even when it feels all-consuming.",
+      "Every moment you face stress, you’re building resilience. You’ve got this.",
+      "You’re doing an incredible job managing what’s on your plate.",
+      "Taking a moment to breathe is a powerful step. You’re in control here.",
+      "You’re not defined by stress—you’re so much more, and you’re doing great.",
+      "You’ve handled stress before, and you’ll get through this too.",
+      "Your effort to manage stress is a sign of your strength. Keep going!",
+      "You’re creating space for calm, even in the chaos. That’s amazing.",
+      "You’re navigating stress with courage, and that’s something to celebrate."
+    ],
+    "coping_strategies": [
+      "Let’s try a quick breathing exercise: inhale for 5, hold for 5, exhale for 5.",
+      "Would it help to make a list of what’s stressing you out and prioritize one thing?",
+      "Sometimes stepping away for 5 minutes can reset you. Want to try a quick break?",
+      "Let’s break one stressful task into smaller steps. What’s the first tiny action?",
+      "Physical movement, like shaking out your arms, can release stress. Want to try?",
+      "Would it help to visualize letting go of stress, like leaves floating away?",
+      "Let’s identify one thing you can say ‘no’ to today to lighten your load.",
+      "Listening to calming sounds or music can help. Do you have a go-to track?",
+      "Try sipping water slowly and noticing the coolness. It can ground you.",
+      "Let’s schedule a small reward for yourself after tackling something stressful."
+    ],
+    "grounding_prompts": [
+      "Feel your feet on the ground. Take a slow breath and notice the support beneath you.",
+      "Can you name 3 things you see that feel neutral or calming?",
+      "Focus on one object nearby. Describe its details for a moment to anchor yourself.",
+      "Let’s count 5 slow exhales together, letting stress melt with each one.",
+      "What’s one texture you can feel right now, like your clothes or a surface?",
+      "Listen for a steady sound, like a clock or fan, and let it center you.",
+      "Take a moment to stretch your fingers and notice the movement. You’re here.",
+      "Can you describe one thing in your space that feels reliable or familiar?",
+      "Imagine stress as a heavy backpack—picture setting it down for a moment.",
+      "Press your hands together and feel the warmth. You’re in this moment, and you’re okay."
+    ]
+  },
+
+  "anger": {
+    "validation_and_support": [
+      "It’s okay to feel angry—your emotions are valid, and I’m here to listen.",
+      "Anger can feel intense, but you’re not alone in navigating it.",
+      "You’re allowed to feel this way, and it’s important to express it safely.",
+      "I hear how frustrated you are, and I’m here to help you work through it.",
+      "Anger often has something important to say. Let’s explore it together.",
+      "You don’t have to suppress your anger—it’s okay to let it out here.",
+      "Your feelings matter, even when they’re fiery. I’m here to support you.",
+      "It’s normal to feel angry when things feel unfair or overwhelming.",
+      "You’re doing great by acknowledging your anger. That’s a strong first step.",
+      "Anger can be a signal that something needs attention. I’m here to help."
+    ],
+    "exploration": [
+      "What happened that’s making you feel so angry right now?",
+      "How does your anger feel in your body? Any tightness or heat?",
+      "Is there a specific event or person tied to this anger?",
+      "What thoughts come up when you’re feeling this way?",
+      "Have you felt this kind of anger before? What was going on then?",
+      "What do you usually do when you feel angry? Does anything help calm it?",
+      "Is there something you wish you could say or do about this anger?",
+      "What’s the hardest part of feeling angry right now?",
+      "Does your anger feel like it’s protecting you from something else?",
+      "What’s one thing you’d like to change about the situation causing this?"
+    ],
+    "reinforcement": [
+      "You’re doing great by sharing your anger instead of bottling it up.",
+      "It takes strength to face your anger head-on, and you’re doing that now.",
+      "You’re not your anger—you’re navigating it, and that’s powerful.",
+      "You’re taking steps to understand your emotions, and that’s a big deal.",
+      "Your anger doesn’t define you—it’s just a moment, and you’re moving through it.",
+      "You’re allowed to feel this way, and you’re handling it with courage.",
+      "Every time you express anger safely, you’re learning more about yourself.",
+      "You’ve got the strength to channel this energy into something positive.",
+      "You’re creating space to process your anger, and that’s a victory.",
+      "You’re showing resilience by working through this. Keep going!"
+    ],
+    "coping_strategies": [
+      "Let’s try a quick release: take a deep breath and exhale with a loud sigh.",
+      "Would it help to write down everything you’re angry about and then tear it up?",
+      "Physical movement, like shaking out your hands or walking, can help. Want to try?",
+      "Let’s imagine your anger as a color or shape. What is it, and how can we soften it?",
+      "Counting to 10 slowly can give your anger space to settle. Want to try it?",
+      "Sometimes shouting into a pillow or squeezing a stress ball helps. What’s nearby?",
+      "Let’s channel your anger into something creative, like drawing or writing a letter.",
+      "Would it help to talk through what’s making you angry, step by step?",
+      "Try tensing and relaxing your muscles to release some of that energy.",
+      "Let’s identify one small action you can take to feel more in control right now."
+    ],
+    "grounding_prompts": [
+      "Feel your feet on the ground and take a slow breath. You’re in control here.",
+      "Can you name 3 things you see that feel neutral or grounding?",
+      "Focus on something cool to the touch, like a glass or surface. Describe it.",
+      "Let’s count 5 deep breaths, letting your anger soften with each exhale.",
+      "What’s one sound you can focus on to bring you back to this moment?",
+      "Press your hands together and notice the pressure. You’re here, and you’re okay.",
+      "Can you describe one object in detail, like its shape or texture?",
+      "Imagine your anger as a fire—picture it slowly cooling into embers.",
+      "Take a slow sip of water and notice how it feels. You’re grounded in this moment.",
+      "Look around—what’s one thing that feels steady or calming?"
+    ]
+  }
 }
