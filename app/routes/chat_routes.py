@@ -21,7 +21,7 @@ conversation_handlers: Dict[str, ConversationHandler] = {}
 def chat():
     """
     Handle chat messages and generate appropriate responses.
-    Expects JSON with 'session_id' and 'message' fields.
+    Expects JSON with 'session_id', 'user_id', 'message', and optional 'language' fields.
     """
     try:
         # Validate request data
@@ -31,11 +31,13 @@ def chat():
             return jsonify({"error": "No data provided"}), 400
 
         session_id = data.get('session_id')
+        user_id = data.get('user_id', f"user_{session_id}")  # Default to session-based ID
         message = data.get('message')
+        language = data.get('language', 'en')
 
-        if not session_id or not message:
+        if not session_id or not message or not user_id:
             logger.warning("Missing required fields in request")
-            return jsonify({"error": "Missing session_id or message"}), 400
+            return jsonify({"error": "Missing session_id, user_id, or message"}), 400
 
         # Validate session
         if not validate_session(session_id):
@@ -46,7 +48,7 @@ def chat():
         handler = _get_or_create_handler(session_id)
 
         # Process message and generate response
-        response_data = _process_message(handler, message)
+        response_data = _process_message(handler, message, session_id, user_id, language)
 
         # Clean up old sessions if needed
         _cleanup_old_sessions()
@@ -65,13 +67,13 @@ def _get_or_create_handler(session_id: str) -> ConversationHandler:
         conversation_handlers[session_id] = ConversationHandler()
     return conversation_handlers[session_id]
 
-def _process_message(handler: ConversationHandler, message: str) -> dict:
+def _process_message(handler: ConversationHandler, message: str, session_id: str, user_id: str, language: str) -> dict:
     """Process the incoming message and generate a response."""
     # Generate response using the conversation handler
-    response = handler.generate_response(message)
+    response = handler.generate_response(message, session_id, user_id, language)
     
     # Get the current context
-    context = handler.context.get_context()
+    context = handler.context.get_context(user_id)
     
     # Create the response data structure
     response_data = {
@@ -116,13 +118,10 @@ def _cleanup_old_sessions(max_sessions: int = 1000):
     Removes oldest sessions based on interaction count.
     """
     if len(conversation_handlers) > max_sessions:
-        # Sort sessions by interaction count
         sorted_sessions = sorted(
             conversation_handlers.items(),
-            key=lambda x: x[1].context.get_context()["interaction_count"]
+            key=lambda x: x[1].context.get_context(x[1].context.get_context().get("user_id", "default"))["interaction_count"]
         )
-        
-        # Remove oldest sessions to get back to max_sessions
         sessions_to_remove = len(conversation_handlers) - max_sessions
         for session_id, _ in sorted_sessions[:sessions_to_remove]:
             logger.info(f"Cleaning up old session: {session_id}")
