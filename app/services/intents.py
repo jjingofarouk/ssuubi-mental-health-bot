@@ -22,5 +22,4 @@ class MessageIntent(Enum):
     TRAUMA = "trauma"  # New
     SELF_ESTEEM = "self_esteem"  # New
     
-    pip install sentence-transformers==3.1.1 transformers==4.44.2 googletrans==4.0.0-rc1 pymongo==4.10.1 nltk==3.9.1
-python -c "import nltk; nltk.download('punkt')"
+    

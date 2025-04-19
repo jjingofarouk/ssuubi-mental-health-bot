@@ -117,8 +117,6 @@ class MessageAnalyzer:
         elif intent == MessageIntent.DEPRESSION:
             intensity_words = re.findall(
                 r'(very|really|so|extremely|incredibly|terribly|awfully|deeply|'
-                r'proнием
-
                 r'profoundly|hopelessly)\s*(depressed|sad|down|hopeless)',
                 message, re.IGNORECASE
             )
