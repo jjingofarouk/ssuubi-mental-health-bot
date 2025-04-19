@@ -1,9 +1,17 @@
+from typing import Dict, Optional
+from googletrans import Translator
+import logging
 from .message_analyzer import MessageAnalyzer
 from .response_generator import ResponseGenerator
 from .crisis_handler import CrisisHandler
 from .context import ConversationContext
-from .intents import MessageIntent
 from .sentiment_analyzer import SentimentAnalyzer
+from .intents import MessageIntent
+from app.models.session_model import Session
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class ConversationHandler:
     def __init__(self):
@@ -12,33 +20,113 @@ class ConversationHandler:
         self.crisis_handler = CrisisHandler()
         self.sentiment_analyzer = SentimentAnalyzer()
         self.context = ConversationContext()
+        self.translator = Translator()
+        self.sessions = {}  # In-memory session storage (sync with ConversationManager)
 
-    def generate_response(self, message: str, session_id: str, user_id: str) -> str:
-        # Analyze sentiment
-        sentiment_result = self.sentiment_analyzer.analyze_message(message, {'user_id': user_id})
-        context = self.context.get_context()
-        context.update({
-            'sentiment_analysis': sentiment_result,
-            'user_id': user_id,
-            'preferences': {'preferred_technique': 'breathing'}  # From user profile
-        })
-
-        if self.crisis_handler.is_crisis_message(message):
-            self.context.update_context(
-                intent=MessageIntent.CRISIS,
-                interaction_count=context['interaction_count'] + 1,
-                identified_themes=sentiment_result['themes'],
-                crisis_mode=True
-            )
-            return self.crisis_handler.generate_crisis_response()
-
-        intent, details = self.analyzer.analyze_message(message, context)
-        context['details'] = details
+    def create_session(self, session_id: str, user_id: str) -> None:
+        """
+        Initialize a new session for a user.
+        """
+        self.sessions[session_id] = Session(session_id, user_id)
         self.context.update_context(
-            intent=intent,
-            interaction_count=context['interaction_count'] + 1,
-            identified_themes=sentiment_result['themes'],
-            crisis_mode=False
+            user_id=user_id,
+            intent=None,
+            interaction_count=0,
+            identified_themes=set(),
+            crisis_mode=False,
+            details={},
+            preferences={'preferred_technique': 'breathing'},  # Default
+            emotional_state='validation'
         )
+        logger.info(f"Created session {session_id} for user {user_id}")
 
-        return self.response_generator.generate_response(intent, context)
+    def generate_response(self, message: str, session_id: str, user_id: str, language: str = 'en') -> str:
+        """
+        Generate a response based on user message, session, and context.
+        Args:
+            message: User input string.
+            session_id: Unique session identifier.
+            user_id: Unique user identifier.
+            language: Language code (e.g., 'en', 'es').
+        Returns:
+            Response string in the user's language.
+        """
+        try:
+            # Ensure session exists
+            if session_id not in self.sessions:
+                self.create_session(session_id, user_id)
+
+            # Translate non-English input to English for processing
+            original_message = message
+            if language != 'en':
+                message = self.translator.translate(message, dest='en').text
+                logger.debug(f"Translated message from {language} to en: {message}")
+
+            # Analyze sentiment and themes
+            sentiment_result = self.sentiment_analyzer.analyze_message(message, {'user_id': user_id})
+            context = self.context.get_context(user_id)
+            context.update({
+                'sentiment_analysis': sentiment_result,
+                'user_id': user_id,
+                'session_id': session_id,
+                'language': language,
+                'preferences': context.get('preferences', {'preferred_technique': 'breathing'})
+            })
+
+            # Check for crisis
+            if self.crisis_handler.is_crisis_message(message, sentiment_result):
+                self.context.update_context(
+                    user_id=user_id,
+                    intent=MessageIntent.CRISIS,
+                    interaction_count=context['interaction_count'] + 1,
+                    identified_themes=set(sentiment_result['themes']),
+                    crisis_mode=True,
+                    details={},
+                    preferences=context['preferences'],
+                    emotional_state='validation'
+                )
+                response = self.crisis_handler.generate_crisis_response(context)
+                self._update_session(session_id, original_message, response)
+                return self.translator.translate(response, dest=language).text if language != 'en' else response
+
+            # Analyze intent and details
+            intent, details = self.analyzer.analyze_message(message, context)
+            context['details'] = details
+
+            # Proactive suggestion based on history
+            if 'anxiety' in sentiment_result['themes'] and context['interaction_count'] > 2:
+                if context['preferences']['preferred_technique'] in ['breathing', 'grounding']:
+                    details['suggestion'] = f"Since you’ve mentioned anxiety before, would you like to try {context['preferences']['preferred_technique']} again?"
+
+            # Update context
+            self.context.update_context(
+                user_id=user_id,
+                intent=intent,
+                interaction_count=context['interaction_count'] + 1,
+                identified_themes=set(sentiment_result['themes']),
+                crisis_mode=False,
+                details=details,
+                preferences=context['preferences'],
+                emotional_state=context.get('emotional_state', 'validation')
+            )
+
+            # Generate response
+            response = self.response_generator.generate_response(intent, context)
+            self._update_session(session_id, original_message, response)
+
+            # Translate response back to user's language
+            return self.translator.translate(response, dest=language).text if language != 'en' else response
+
+        except Exception as e:
+            logger.error(f"Error in conversation handler: {str(e)}")
+            fallback = "I’m having trouble understanding. Can you say that again?"
+            self._update_session(session_id, original_message, fallback)
+            return self.translator.translate(fallback, dest=language).text if language != 'en' else fallback
+
+    def _update_session(self, session_id: str, user_message: str, bot_message: str) -> None:
+        """
+        Update session history with user and bot messages.
+        """
+        if session_id in self.sessions:
+            self.sessions[session_id].update_conversation_history(user_message, bot_message)
+            logger.debug(f"Updated session {session_id} with user: {user_message}, bot: {bot_message}")
