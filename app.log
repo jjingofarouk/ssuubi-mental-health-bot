@@ -360,3 +360,71 @@ Traceback (most recent call last):
                                      ^^^^^^^^^^^^^^^^
 UnboundLocalError: cannot access local variable 'original_message' where it is not associated with a value
 
+2025-04-19 23:49:07,506 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
+2025-04-19 23:49:10,313 - app.services.response_generator - WARNING - therapeutic_responses.json not found, using empty responses
+2025-04-19 23:49:14,033 - app.services.conversation_handler - ERROR - Failed to create session demo-session: ConversationContext.update_context() got an unexpected keyword argument 'emotional_state'
+2025-04-19 23:49:14,033 - app.services.conversation_handler - ERROR - Error in conversation handler: ConversationContext.update_context() got an unexpected keyword argument 'emotional_state'
+2025-04-19 23:49:44,073 - app.routes.chat_routes - ERROR - Error in chat endpoint: localhost:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 30s, Topology Description: <TopologyDescription id: 6804367aaaab9470ef8e1e91, topology_type: Unknown, servers: [<ServerDescription ('localhost', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('localhost:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+2025-04-19 23:49:44,079 - app.routes.chat_routes - ERROR - Traceback (most recent call last):
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 51, in chat
+    response_data = _process_message(handler, message, session_id, user_id, language)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 76, in _process_message
+    context = handler.context.get_context(user_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/services/context.py", line 29, in get_context
+    context = self.context_collection.find_one({'user_id': user_id})
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/collection.py", line 1730, in find_one
+    for result in cursor.limit(-1):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/cursor.py", line 1281, in __next__
+    return self.next()
+           ^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/cursor.py", line 1257, in next
+    if len(self._data) or self._refresh():
+                          ^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/cursor.py", line 1205, in _refresh
+    self._send_message(q)
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/cursor.py", line 1100, in _send_message
+    response = client._run_operation(
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/_csot.py", line 119, in csot_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/mongo_client.py", line 1754, in _run_operation
+    return self._retryable_read(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/mongo_client.py", line 1863, in _retryable_read
+    return self._retry_internal(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/_csot.py", line 119, in csot_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/mongo_client.py", line 1830, in _retry_internal
+    ).run()
+      ^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/mongo_client.py", line 2554, in run
+    return self._read() if self._is_read else self._write()
+           ^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/mongo_client.py", line 2689, in _read
+    self._server = self._get_server()
+                   ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/mongo_client.py", line 2645, in _get_server
+    return self._client._select_server(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/mongo_client.py", line 1649, in _select_server
+    server = topology.select_server(
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/topology.py", line 398, in select_server
+    server = self._select_server(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/topology.py", line 376, in _select_server
+    servers = self.select_servers(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/topology.py", line 283, in select_servers
+    server_descriptions = self._select_servers_loop(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/topology.py", line 333, in _select_servers_loop
+    raise ServerSelectionTimeoutError(
+pymongo.errors.ServerSelectionTimeoutError: localhost:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 30s, Topology Description: <TopologyDescription id: 6804367aaaab9470ef8e1e91, topology_type: Unknown, servers: [<ServerDescription ('localhost', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('localhost:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+

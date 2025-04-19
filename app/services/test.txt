@@ -1,11 +1,3 @@
-INFO:werkzeug: * Restarting with stat
-[nltk_data] Downloading package punkt to /home/codespace/nltk_data...
-[nltk_data]   Package punkt is already up-to-date!
-[nltk_data] Downloading package punkt to /home/codespace/nltk_data...
-[nltk_data]   Package punkt is already up-to-date!
-[nltk_data] Downloading package punkt_tab to
-[nltk_data]     /home/codespace/nltk_data...
-[nltk_data]   Package punkt_tab is already up-to-date!
 NLTK resources downloaded successfully
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 644-685-094
@@ -66,3 +58,150 @@ Traceback (most recent call last):
 UnboundLocalError: cannot access local variable 'original_message' where it is not associated with a value
 
 INFO:werkzeug:127.0.0.1 - - [19/Apr/2025 23:33:11] "POST /api/chat HTTP/1.1" 500 -
+INFO:werkzeug: * Detected change in '/workspaces/ssuubi-mental-health-bot/app/services/response_generator.py', reloading
+INFO:werkzeug: * Restarting with stat
+[nltk_data] Downloading package punkt to /home/codespace/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package punkt to /home/codespace/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package punkt_tab to
+[nltk_data]     /home/codespace/nltk_data...
+[nltk_data]   Package punkt_tab is already up-to-date!
+NLTK resources downloaded successfully
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 644-685-094
+INFO:werkzeug: * Detected change in '/workspaces/ssuubi-mental-health-bot/app/services/response_generator.py', reloading
+INFO:werkzeug: * Restarting with stat
+[nltk_data] Downloading package punkt to /home/codespace/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package punkt to /home/codespace/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package punkt_tab to
+[nltk_data]     /home/codespace/nltk_data...
+[nltk_data]   Package punkt_tab is already up-to-date!
+NLTK resources downloaded successfully
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 644-685-094
+INFO:werkzeug: * Detected change in '/workspaces/ssuubi-mental-health-bot/app/services/response_generator.py', reloading
+INFO:werkzeug: * Restarting with stat
+[nltk_data] Downloading package punkt to /home/codespace/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package punkt to /home/codespace/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package punkt_tab to
+[nltk_data]     /home/codespace/nltk_data...
+[nltk_data]   Package punkt_tab is already up-to-date!
+NLTK resources downloaded successfully
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 644-685-094
+INFO:werkzeug: * Detected change in '/workspaces/ssuubi-mental-health-bot/app/services/conversation_handler.py', reloading
+INFO:werkzeug: * Restarting with stat
+[nltk_data] Downloading package punkt to /home/codespace/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package punkt to /home/codespace/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package punkt_tab to
+[nltk_data]     /home/codespace/nltk_data...
+[nltk_data]   Package punkt_tab is already up-to-date!
+NLTK resources downloaded successfully
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 644-685-094
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2025 23:48:59] "GET / HTTP/1.1" 200 -
+INFO:app.routes.chat_routes:Creating new conversation handler for session: demo-session
+/usr/local/python/3.12.1/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:1601: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be depracted in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
+  warnings.warn(
+Failed to determine 'entailment' label id from the label2id mapping in the model config. Setting to -1. Define a descriptive label2id mapping in the model config to ensure correct outputs.
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+WARNING:app.services.response_generator:therapeutic_responses.json not found, using empty responses
+No model was supplied, defaulted to distilbert/distilbert-base-uncased-finetuned-sst-2-english and revision af0f99b (https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-sst-2-english).
+Using a pipeline without specifying a model name and revision in production is not recommended.
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  1.18it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 38.57it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 35.32it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 28.69it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 24.92it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 30.93it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 45.31it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 48.95it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 39.14it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 37.76it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 52.75it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 48.23it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 43.48it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 44.84it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 35.62it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 30.53it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 31.35it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 51.92it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 51.01it/s]
+Batches: 100%|█████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 37.70it/s]
+ERROR:app.services.conversation_handler:Failed to create session demo-session: ConversationContext.update_context() got an unexpected keyword argument 'emotional_state'
+ERROR:app.services.conversation_handler:Error in conversation handler: ConversationContext.update_context() got an unexpected keyword argument 'emotional_state'
+ERROR:app.routes.chat_routes:Error in chat endpoint: localhost:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 30s, Topology Description: <TopologyDescription id: 6804367aaaab9470ef8e1e91, topology_type: Unknown, servers: [<ServerDescription ('localhost', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('localhost:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+ERROR:app.routes.chat_routes:Traceback (most recent call last):
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 51, in chat
+    response_data = _process_message(handler, message, session_id, user_id, language)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 76, in _process_message
+    context = handler.context.get_context(user_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/services/context.py", line 29, in get_context
+    context = self.context_collection.find_one({'user_id': user_id})
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/collection.py", line 1730, in find_one
+    for result in cursor.limit(-1):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/cursor.py", line 1281, in __next__
+    return self.next()
+           ^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/cursor.py", line 1257, in next
+    if len(self._data) or self._refresh():
+                          ^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/cursor.py", line 1205, in _refresh
+    self._send_message(q)
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/cursor.py", line 1100, in _send_message
+    response = client._run_operation(
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/_csot.py", line 119, in csot_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/mongo_client.py", line 1754, in _run_operation
+    return self._retryable_read(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/mongo_client.py", line 1863, in _retryable_read
+    return self._retry_internal(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/_csot.py", line 119, in csot_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/mongo_client.py", line 1830, in _retry_internal
+    ).run()
+      ^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/mongo_client.py", line 2554, in run
+    return self._read() if self._is_read else self._write()
+           ^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/mongo_client.py", line 2689, in _read
+    self._server = self._get_server()
+                   ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/mongo_client.py", line 2645, in _get_server
+    return self._client._select_server(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/mongo_client.py", line 1649, in _select_server
+    server = topology.select_server(
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/topology.py", line 398, in select_server
+    server = self._select_server(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/topology.py", line 376, in _select_server
+    servers = self.select_servers(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/topology.py", line 283, in select_servers
+    server_descriptions = self._select_servers_loop(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/pymongo/synchronous/topology.py", line 333, in _select_servers_loop
+    raise ServerSelectionTimeoutError(
+pymongo.errors.ServerSelectionTimeoutError: localhost:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 30s, Topology Description: <TopologyDescription id: 6804367aaaab9470ef8e1e91, topology_type: Unknown, servers: [<ServerDescription ('localhost', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('localhost:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+
+INFO:werkzeug:127.0.0.1 - - [19/Apr/2025 23:49:44] "POST /api/chat HTTP/1.1" 500 -
