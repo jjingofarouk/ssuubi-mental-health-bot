@@ -25,18 +25,22 @@ class ConversationHandler:
 
     def create_session(self, session_id: str, user_id: str) -> None:
         """Initialize a new session for a user."""
-        self.sessions[session_id] = Session(session_id, user_id)
-        self.context.update_context(
-            user_id=user_id,
-            intent=None,
-            interaction_count=0,
-            identified_themes=set(),
-            crisis_mode=False,
-            details={},
-            preferences={'preferred_technique': 'breathing'},
-            emotional_state='validation'
-        )
-        logger.info(f"Created session {session_id} for user {user_id}")
+        try:
+            self.sessions[session_id] = Session(session_id, user_id)
+            self.context.update_context(
+                user_id=user_id,
+                intent=None,
+                interaction_count=0,
+                identified_themes=set(),
+                crisis_mode=False,
+                details={},
+                preferences={'preferred_technique': 'breathing'},
+                emotional_state='validation'
+            )
+            logger.info(f"Created session {session_id} for user {user_id}")
+        except Exception as e:
+            logger.error(f"Failed to create session {session_id}: {str(e)}")
+            raise
 
     def generate_response(self, message: str, session_id: str = None, user_id: str = None, language: str = 'en') -> str:
         """
@@ -49,6 +53,7 @@ class ConversationHandler:
         Returns:
             Response string in the user's language.
         """
+        original_message = message  # Define before try block
         try:
             # Fallback for missing session_id or user_id
             session_id = session_id or 'default-session'
@@ -59,7 +64,6 @@ class ConversationHandler:
                 self.create_session(session_id, user_id)
 
             # Translate non-English input to English
-            original_message = message
             if language != 'en':
                 message = self.translator.translate(message, dest='en').text
                 logger.debug(f"Translated message from {language} to en: {message}")
