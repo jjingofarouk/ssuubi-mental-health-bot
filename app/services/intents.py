@@ -1,4 +1,3 @@
-# services/intents.py
 from enum import Enum
 
 class MessageIntent(Enum):
@@ -20,3 +19,5 @@ class MessageIntent(Enum):
     MOTIVATION = "motivation"
     WORK_STRESS = "work_stress"
     FAMILY = "family"
+    TRAUMA = "trauma"  # New
+    SELF_ESTEEM = "self_esteem"  # New
