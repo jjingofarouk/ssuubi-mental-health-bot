@@ -8,11 +8,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #000000; /* Black for primary elements */
-            --secondary-color: #4B5563; /* Gray-600 for secondary text */
-            --background-color: #FFFFFF; /* White background */
-            --input-bg: #F9FAFB; /* Light gray for input area */
-            --border-color: #E5E7EB; /* Gray-200 for borders */
+            --primary-color: #D1D5DB; /* Light gray for text */
+            --secondary-color: #9CA3AF; /* Gray-400 for secondary text */
+            --background-color: #202123; /* Dark gray background */
+            --input-bg: #343541; /* Darker gray for input area */
+            --border-color: #4B5563; /* Gray-600 for borders */
+            --accent-color: #10A37F; /* Subtle green for active states (ChatGPT-like) */
         }
 
         body {
@@ -38,13 +39,13 @@
         }
 
         .user {
-            background-color: #F3F4F6; /* Gray-100 */
+            background-color: #343541; /* Dark gray for user messages */
             color: var(--primary-color);
             margin-left: auto;
         }
 
         .bot {
-            background-color: #F9FAFB; /* Gray-50 */
+            background-color: #2D2E33; /* Slightly lighter dark gray for bot */
             color: var(--primary-color);
             border: 1px solid var(--border-color);
         }
@@ -89,13 +90,13 @@
         }
 
         .input-container:focus-within {
-            border-color: var(--primary-color);
+            border-color: var(--accent-color);
         }
 
         .sidebar {
-            background: var(--background-color);
+            background: #2D2E33; /* Darker sidebar */
             border-right: 1px solid var(--border-color);
-            transition: transform 0.3;
+            transition: transform 0.3s ease-in-out;
             transform: translateX(-100%);
         }
 
@@ -104,7 +105,7 @@
         }
 
         .sidebar-overlay {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
             transition: opacity 0.2s;
         }
 
@@ -114,44 +115,42 @@
         }
 
         .nav-item:hover {
-            background-color: #F3F4F6; /* Gray-100 */
+            background-color: #343541;
         }
 
         .mood-button {
             transition: background-color 0.2s;
             border-radius: 9999px;
+            background: #343541;
         }
 
         .mood-button:hover {
-            background-color: #E5E7EB; /* Gray-200 */
+            background: #4B5563;
         }
 
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .sidebar {
-                transform: translateX(-100%);
-            }
-            .sidebar.active {
                 transform: translateX(0);
             }
         }
     </style>
 </head>
-<body class="min-h-screen bg-white">
+<body class="min-h-screen">
     <!-- Sidebar Overlay -->
     <div id="overlay" class="sidebar-overlay fixed inset-0 z-30 hidden"></div>
 
     <!-- Mobile Menu Button -->
-    <button id="mobile-menu" class="md:hidden fixed top-4 left-4 z-50 bg-gray-100 text-black p-2 rounded-lg">
+    <button id="mobile-menu" class="md:hidden fixed top-4 left-4 z-50 bg-gray-800 text-white p-2 rounded-lg">
         <i class="fas fa-bars"></i>
     </button>
 
     <div class="flex h-screen">
         <!-- Sidebar -->
         <aside id="sidebar" class="sidebar w-64 h-screen fixed md:relative z-40 overflow-y-auto">
-            <div class="p-4 border-b border-gray-200">
+            <div class="p-4 border-b border-gray-700">
                 <div class="flex items-center justify-between">
-                    <h1 class="text-xl font-semibold text-black">Ssuubi</h1>
-                    <button id="close-sidebar" class="md:hidden text-gray-600 hover:text-black">
+                    <h1 class="text-xl font-semibold text-white">Ssuubi</h1>
+                    <button id="close-sidebar" class="md:hidden text-gray-400 hover:text-white">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
@@ -159,7 +158,7 @@
             
             <!-- New Chat Button -->
             <div class="p-4">
-                <button class="w-full bg-gray-100 text-black rounded-lg py-2 px-4 flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors">
+                <button class="w-full bg-gray-800 text-white rounded-lg py-2 px-4 flex items-center justify-center gap-2 hover:bg-gray-700 transition-colors">
                     <i class="fas fa-plus"></i>
                     New Chat
                 </button>
@@ -168,28 +167,28 @@
             <!-- Navigation Items -->
             <nav class="p-4">
                 <div class="space-y-2">
-                    <a href="#" class="nav-item flex items-center gap-3 text-gray-600 p-3">
+                    <a href="#" class="nav-item flex items-center gap-3 text-gray-400 p-3">
                         <i class="fas fa-history"></i>
                         <span>Chat History</span>
                     </a>
-                    <a href="#" class="nav-item flex items-center gap-3 text-gray-600 p-3">
+                    <a href="#" class="nav-item flex items-center gap-3 text-gray-400 p-3">
                         <i class="fas fa-book"></i>
                         <span>Resources</span>
                     </a>
-                    <a href="#" class="nav-item flex items-center gap-3 text-gray-600 p-3">
+                    <a href="#" class="nav-item flex items-center gap-3 text-gray-400 p-3">
                         <i class="fas fa-hand-holding-heart"></i>
                         <span>Self-Care Tools</span>
                     </a>
-                    <a href="#" class="nav-item flex items-center gap-3 text-gray-600 p-3">
+                    <a href="#" class="nav-item flex items-center gap-3 text-gray-400 p-3">
                         <i class="fas fa-phone"></i>
                         <span>Crisis Support</span>
                     </a>
-                    <div class="border-t my-4 border-gray-200"></div>
-                    <a href="#" class="nav-item flex items-center gap-3 text-gray-600 p-3">
+                    <div class="border-t my-4 border-gray-700"></div>
+                    <a href="#" class="nav-item flex items-center gap-3 text-gray-400 p-3">
                         <i class="fas fa-comment-dots"></i>
                         <span>Previous Chat 1</span>
                     </a>
-                    <a href="#" class="nav-item flex items-center gap-3 text-gray-600 p-3">
+                    <a href="#" class="nav-item flex items-center gap-3 text-gray-400 p-3">
                         <i class="fas fa-comment-dots"></i>
                         <span>Previous Chat 2</span>
                     </a>
@@ -197,8 +196,8 @@
             </nav>
 
             <!-- Settings Section -->
-            <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-white">
-                <a href="#" class="nav-item flex items-center gap-3 text-gray-600 p-3">
+            <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-700 bg-gray-800">
+                <a href="#" class="nav-item flex items-center gap-3 text-gray-400 p-3">
                     <i class="fas fa-cog"></i>
                     <span>Settings</span>
                 </a>
@@ -208,20 +207,20 @@
         <!-- Main Content -->
         <main class="flex-1 flex flex-col h-screen overflow-hidden md:ml-0">
             <!-- Mood Check -->
-            <div class="bg-white border-b border-gray-200 px-4 py-3">
+            <div class="bg-gray-800 border-b border-gray-700 px-4 py-3">
                 <div class="flex items-center justify-between mb-3">
-                    <p class="text-gray-600 text-sm">How are you feeling today?</p>
+                    <p class="text-gray-400 text-sm">How are you feeling today?</p>
                     <div class="flex items-center gap-2">
                         <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                        <span class="text-xs text-gray-600">Active</span>
+                        <span class="text-xs text-gray-400">Active</span>
                     </div>
                 </div>
                 <div class="flex gap-2 overflow-x-auto pb-2">
-                    <button class="mood-button px-3 py-1 bg-gray-100 text-black text-sm">😊 Good</button>
-                    <button class="mood-button px-3 py-1 bg-gray-100 text-black text-sm">😐 Okay</button>
-                    <button class="mood-button px-3 py-1 bg-gray-100 text-black text-sm">😔 Not Great</button>
-                    <button class="mood-button px-3 py-1 bg-gray-100 text-black text-sm">😴 Tired</button>
-                    <button class="mood-button px-3 py-1 bg-gray-100 text-black text-sm">🤔 Unsure</button>
+                    <button class="mood-button px-3 py-1 text-white text-sm">😊 Good</button>
+                    <button class="mood-button px-3 py-1 text-white text-sm">😐 Okay</button>
+                    <button class="mood-button px-3 py-1 text-white text-sm">😔 Not Great</button>
+                    <button class="mood-button px-3 py-1 text-white text-sm">😴 Tired</button>
+                    <button class="mood-button px-3 py-1 text-white text-sm">🤔 Unsure</button>
                 </div>
             </div>
 
@@ -241,11 +240,11 @@
                             id="user-input"
                             type="text" 
                             placeholder="Type a message..."
-                            class="flex-1 outline-none bg-transparent text-black placeholder-gray-400"
+                            class="flex-1 outline-none bg-transparent text-white placeholder-gray-500"
                         >
                         <button 
                             id="send-btn"
-                            class="bg-gray-100 text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
+                            class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors"
                         >
                             <i class="fas fa-paper-plane"></i>
                         </button>
@@ -253,7 +252,7 @@
                 </div>
 
                 <!-- Footer -->
-                <footer class="text-center mt-4 text-xs text-gray-500">
+                <footer class="text-center mt-4 text-xs text-gray-400">
                     <p>If you're in crisis, please reach out:</p>
                     <p class="mt-1">
                         <a href="tel:988" class="resource-link">Crisis Hotline: 988</a>
