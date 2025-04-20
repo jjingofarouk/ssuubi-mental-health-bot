@@ -458,3 +458,41 @@ KeyError: 'previous_intent'
                                                            ~~~~~~~^^^^^^^^^^^^^^^^^^^
 KeyError: 'previous_intent'
 
+2025-04-20 00:36:15,733 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
+2025-04-20 00:36:18,005 - app.services.response_generator - WARNING - mental_health_responses.json not found, using empty responses
+2025-04-20 00:36:21,834 - app.services.context - INFO - Initialized in-memory context storage
+2025-04-20 00:36:21,854 - app.services.conversation_handler - INFO - Created session demo-session for user user_demo-session
+2025-04-20 00:36:22,069 - app.services.response_generator - WARNING - No matching response for intent MessageIntent.GREETING and themes []
+2025-04-20 00:36:22,069 - app.routes.chat_routes - ERROR - Error in chat endpoint: Object of type MessageIntent is not JSON serializable
+2025-04-20 00:36:22,076 - app.routes.chat_routes - ERROR - Traceback (most recent call last):
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 43, in chat
+    return jsonify(response_data)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/json/__init__.py", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/json/provider.py", line 214, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=self.mimetype
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/json/provider.py", line 179, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/json/encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/local/python/3.12.1/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/local/python/3.12.1/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/local/python/3.12.1/lib/python3.12/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/json/provider.py", line 121, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type MessageIntent is not JSON serializable
+

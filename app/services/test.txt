@@ -1,14 +1,34 @@
-WARNING:app.services.context:MongoDB connection failed: localhost:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 68043e9e57628f3870d216ef, topology_type: Unknown, servers: [<ServerDescription ('localhost', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('localhost:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>. Using in-memory storage.
-ERROR:app.services.conversation_handler:Failed to create session demo-session: module 'pymongo' has no attribute 'datetime'
-ERROR:app.services.conversation_handler:Error in conversation handler: module 'pymongo' has no attribute 'datetime'
-ERROR:app.routes.chat_routes:Error in chat endpoint: 'previous_intent'
+ERROR:app.routes.chat_routes:Error in chat endpoint: Object of type MessageIntent is not JSON serializable
 ERROR:app.routes.chat_routes:Traceback (most recent call last):
-  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 51, in chat
-    response_data = _process_message(handler, message, session_id, user_id, language)
-                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 85, in _process_message
-    "previous_intent": context["previous_intent"].value if context["previous_intent"] else None
-                                                           ~~~~~~~^^^^^^^^^^^^^^^^^^^
-KeyError: 'previous_intent'
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 43, in chat
+    return jsonify(response_data)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/json/__init__.py", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/json/provider.py", line 214, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=self.mimetype
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/json/provider.py", line 179, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/json/encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/local/python/3.12.1/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/local/python/3.12.1/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/local/python/3.12.1/lib/python3.12/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/json/provider.py", line 121, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type MessageIntent is not JSON serializable
 
-INFO:werkzeug:127.0.0.1 - - [20/Apr/2025 00:24:03] "POST /api/chat HTTP/1.1" 500 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2025 00:36:22] "POST /api/chat HTTP/1.1" 500 -
