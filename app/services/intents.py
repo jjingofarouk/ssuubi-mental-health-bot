@@ -21,5 +21,9 @@ class MessageIntent(Enum):
     FAMILY = "family"
     TRAUMA = "trauma"  # New
     SELF_ESTEEM = "self_esteem"  # New
+    SLEEP_ISSUES = "sleep_issues"  # New
+    WORK_ISSUES = "work_issues"  # New
+    FAMILY_ISSUES = "family_issues"  # New
+
     
     
