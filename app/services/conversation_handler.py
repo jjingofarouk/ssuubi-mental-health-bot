@@ -9,7 +9,6 @@ from .sentiment_analyzer import SentimentAnalyzer
 from .intents import MessageIntent
 from app.models.session_model import Session
 
-# Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -21,10 +20,9 @@ class ConversationHandler:
         self.sentiment_analyzer = SentimentAnalyzer()
         self.context = ConversationContext()
         self.translator = Translator()
-        self.sessions = {}  # In-memory session storage
+        self.sessions = {}
 
     def create_session(self, session_id: str, user_id: str) -> None:
-        """Initialize a new session for a user."""
         try:
             self.sessions[session_id] = Session(session_id, user_id)
             self.context.update_context(
@@ -43,32 +41,18 @@ class ConversationHandler:
             raise
 
     def generate_response(self, message: str, session_id: str = None, user_id: str = None, language: str = 'en') -> str:
-        """
-        Generate a response based on user message, session, and context.
-        Args:
-            message: User input string.
-            session_id: Unique session identifier (optional, defaults to 'default-session').
-            user_id: Unique user identifier (optional, defaults to 'default-user').
-            language: Language code (e.g., 'en', 'es').
-        Returns:
-            Response string in the user's language.
-        """
-        original_message = message  # Define before try block
+        original_message = message
         try:
-            # Fallback for missing session_id or user_id
             session_id = session_id or 'default-session'
             user_id = user_id or 'default-user'
 
-            # Ensure session exists
             if session_id not in self.sessions:
                 self.create_session(session_id, user_id)
 
-            # Translate non-English input to English
             if language != 'en':
                 message = self.translator.translate(message, dest='en').text
                 logger.debug(f"Translated message from {language} to en: {message}")
 
-            # Analyze sentiment and themes
             sentiment_result = self.sentiment_analyzer.analyze_message(message, {'user_id': user_id})
             context = self.context.get_context(user_id)
             context.update({
@@ -79,7 +63,6 @@ class ConversationHandler:
                 'preferences': context.get('preferences', {'preferred_technique': 'breathing'})
             })
 
-            # Check for crisis
             if self.crisis_handler.is_crisis_message(message, sentiment_result):
                 self.context.update_context(
                     user_id=user_id,
@@ -95,16 +78,13 @@ class ConversationHandler:
                 self._update_session(session_id, original_message, response)
                 return self.translator.translate(response, dest=language).text if language != 'en' else response
 
-            # Analyze intent and details
             intent, details = self.analyzer.analyze_message(message, context)
             context['details'] = details
 
-            # Proactive suggestion
             if 'anxiety' in sentiment_result['themes'] and context['interaction_count'] > 2:
                 if context['preferences']['preferred_technique'] in ['breathing', 'grounding']:
                     details['suggestion'] = f"Since you’ve mentioned anxiety before, would you like to try {context['preferences']['preferred_technique']} again?"
 
-            # Update context
             self.context.update_context(
                 user_id=user_id,
                 intent=intent,
@@ -113,10 +93,9 @@ class ConversationHandler:
                 crisis_mode=False,
                 details=details,
                 preferences=context['preferences'],
-                emotional_state=context.get('emotional_state', 'validation')
+                emotional_state='validation'
             )
 
-            # Generate response
             response = self.response_generator.generate_response(intent, context)
             self._update_session(session_id, original_message, response)
             return self.translator.translate(response, dest=language).text if language != 'en' else response
@@ -128,7 +107,6 @@ class ConversationHandler:
             return self.translator.translate(fallback, dest=language).text if language != 'en' else fallback
 
     def _update_session(self, session_id: str, user_message: str, bot_message: str) -> None:
-        """Update session history with user and bot messages."""
         if session_id in self.sessions:
             self.sessions[session_id].update_conversation_history(user_message, bot_message)
             logger.debug(f"Updated session {session_id} with user: {user_message}, bot: {bot_message}")
