@@ -428,3 +428,33 @@ UnboundLocalError: cannot access local variable 'original_message' where it is n
     raise ServerSelectionTimeoutError(
 pymongo.errors.ServerSelectionTimeoutError: localhost:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 30s, Topology Description: <TopologyDescription id: 6804367aaaab9470ef8e1e91, topology_type: Unknown, servers: [<ServerDescription ('localhost', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('localhost:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
 
+2025-04-20 00:22:03,804 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
+2025-04-20 00:22:06,161 - app.services.response_generator - WARNING - mental_health_responses.json not found, using empty responses
+2025-04-20 00:22:14,952 - app.services.context - WARNING - MongoDB connection failed: localhost:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 68043e317e60e60b0b587e93, topology_type: Unknown, servers: [<ServerDescription ('localhost', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('localhost:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>. Using in-memory storage.
+2025-04-20 00:22:14,958 - app.services.conversation_handler - ERROR - Failed to create session demo-session: module 'pymongo' has no attribute 'datetime'
+2025-04-20 00:22:14,958 - app.services.conversation_handler - ERROR - Error in conversation handler: module 'pymongo' has no attribute 'datetime'
+2025-04-20 00:22:14,959 - app.routes.chat_routes - ERROR - Error in chat endpoint: 'previous_intent'
+2025-04-20 00:22:14,959 - app.routes.chat_routes - ERROR - Traceback (most recent call last):
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 51, in chat
+    response_data = _process_message(handler, message, session_id, user_id, language)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 85, in _process_message
+    "previous_intent": context["previous_intent"].value if context["previous_intent"] else None
+                                                           ~~~~~~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'previous_intent'
+
+2025-04-20 00:23:52,151 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
+2025-04-20 00:23:54,490 - app.services.response_generator - WARNING - mental_health_responses.json not found, using empty responses
+2025-04-20 00:24:03,229 - app.services.context - WARNING - MongoDB connection failed: localhost:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 68043e9e57628f3870d216ef, topology_type: Unknown, servers: [<ServerDescription ('localhost', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('localhost:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>. Using in-memory storage.
+2025-04-20 00:24:03,235 - app.services.conversation_handler - ERROR - Failed to create session demo-session: module 'pymongo' has no attribute 'datetime'
+2025-04-20 00:24:03,235 - app.services.conversation_handler - ERROR - Error in conversation handler: module 'pymongo' has no attribute 'datetime'
+2025-04-20 00:24:03,235 - app.routes.chat_routes - ERROR - Error in chat endpoint: 'previous_intent'
+2025-04-20 00:24:03,236 - app.routes.chat_routes - ERROR - Traceback (most recent call last):
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 51, in chat
+    response_data = _process_message(handler, message, session_id, user_id, language)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 85, in _process_message
+    "previous_intent": context["previous_intent"].value if context["previous_intent"] else None
+                                                           ~~~~~~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'previous_intent'
+

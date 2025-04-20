@@ -8,6 +8,7 @@ from .context import ConversationContext
 from .sentiment_analyzer import SentimentAnalyzer
 from .intents import MessageIntent
 from app.models.session_model import Session
+from datetime import datetime
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
