@@ -15,10 +15,10 @@ class ResponseGenerator:
         self.patterns = get_patterns()
         # Load JSON responses
         try:
-            with open('therapeutic_responses.json', 'r') as f:
+            with open('mental_health_responses.json', 'r') as f:
                 self.json_responses = json.load(f)
         except FileNotFoundError:
-            logger.warning("therapeutic_responses.json not found, using empty responses")
+            logger.warning("mental_health_responses.json not found, using empty responses")
             self.json_responses = {}
         self.user_history = {}  # {user_id: set(used_response_strings)}
         self.user_state = {}   # {user_id: {'stage': str, 'intent': MessageIntent, 'last_updated': datetime}}
