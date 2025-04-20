@@ -1,5 +1,17 @@
-ERROR:app.services.conversation_handler:Error in conversation handler: 'ellipsis' object has no attribute 'search'
-INFO:werkzeug:127.0.0.1 - - [20/Apr/2025 00:48:01] "POST /api/chat HTTP/1.1" 200 -
-Batches: 100%|████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 103.16it/s]
-ERROR:app.services.conversation_handler:Error in conversation handler: 'ellipsis' object has no attribute 'search'
-INFO:werkzeug:127.0.0.1 - - [20/Apr/2025 00:48:07] "POST /api/chat HTTP/1.1" 200 -
+ERROR:app.routes.chat_routes:Error in chat endpoint: type object 'MessageIntent' has no attribute 'SLEEP_ISSUES'
+ERROR:app.routes.chat_routes:Traceback (most recent call last):
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 39, in chat
+    handler = _get_or_create_handler(session_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 53, in _get_or_create_handler
+    conversation_handlers[session_id] = ConversationHandler()
+                                        ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/services/conversation_handler.py", line 18, in __init__
+    self.analyzer = MessageAnalyzer()
+                    ^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/services/message_analyzer.py", line 28, in __init__
+    MessageIntent.SLEEP_ISSUES: ["insomnia", "sleep", "restless"],
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'MessageIntent' has no attribute 'SLEEP_ISSUES'
+
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2025 00:52:14] "POST /api/chat HTTP/1.1" 500 -

@@ -503,3 +503,20 @@ TypeError: Object of type MessageIntent is not JSON serializable
 2025-04-20 00:47:38,385 - app.services.response_generator - WARNING - No matching response for intent MessageIntent.GREETING and themes []
 2025-04-20 00:48:01,822 - app.services.conversation_handler - ERROR - Error in conversation handler: 'ellipsis' object has no attribute 'search'
 2025-04-20 00:48:07,880 - app.services.conversation_handler - ERROR - Error in conversation handler: 'ellipsis' object has no attribute 'search'
+2025-04-20 00:52:12,016 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
+2025-04-20 00:52:14,276 - app.routes.chat_routes - ERROR - Error in chat endpoint: type object 'MessageIntent' has no attribute 'SLEEP_ISSUES'
+2025-04-20 00:52:14,277 - app.routes.chat_routes - ERROR - Traceback (most recent call last):
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 39, in chat
+    handler = _get_or_create_handler(session_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/routes/chat_routes.py", line 53, in _get_or_create_handler
+    conversation_handlers[session_id] = ConversationHandler()
+                                        ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/services/conversation_handler.py", line 18, in __init__
+    self.analyzer = MessageAnalyzer()
+                    ^^^^^^^^^^^^^^^^^
+  File "/workspaces/ssuubi-mental-health-bot/app/services/message_analyzer.py", line 28, in __init__
+    MessageIntent.SLEEP_ISSUES: ["insomnia", "sleep", "restless"],
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'MessageIntent' has no attribute 'SLEEP_ISSUES'
+
