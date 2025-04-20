@@ -67,7 +67,7 @@ class ConversationHandler:
             if self.crisis_handler.is_crisis_message(message, sentiment_result):
                 self.context.update_context(
                     user_id=user_id,
-                    intent=MessageIntent.CRISIS,
+                    intent=MessageIntent.CRISIS.value,  # Convert to string
                     interaction_count=context['interaction_count'] + 1,
                     identified_themes=set(sentiment_result['themes']),
                     crisis_mode=True,
@@ -88,7 +88,7 @@ class ConversationHandler:
 
             self.context.update_context(
                 user_id=user_id,
-                intent=intent,
+                intent=intent.value if isinstance(intent, MessageIntent) else intent,  # Convert to string
                 interaction_count=context['interaction_count'] + 1,
                 identified_themes=set(sentiment_result['themes']),
                 crisis_mode=False,
