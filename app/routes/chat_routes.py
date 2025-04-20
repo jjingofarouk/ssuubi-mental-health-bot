@@ -8,30 +8,23 @@ from app.services.conversation_handler import ConversationHandler
 from app.services.intents import MessageIntent
 from app.utils.helpers import validate_session
 
-# Initialize logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 chat_bp = Blueprint('chat', __name__)
 
-# Store conversation handlers for each session
 conversation_handlers: Dict[str, ConversationHandler] = {}
 
 @chat_bp.route('/api/chat', methods=['POST'])
 def chat():
-    """
-    Handle chat messages and generate appropriate responses.
-    Expects JSON with 'session_id', 'user_id', 'message', and optional 'language' fields.
-    """
     try:
-        # Validate request data
         data = request.get_json()
         if not data:
             logger.warning("No data provided in request")
             return jsonify({"error": "No data provided"}), 400
 
         session_id = data.get('session_id')
-        user_id = data.get('user_id', f"user_{session_id}")  # Default to session-based ID
+        user_id = data.get('user_id', f"user_{session_id}")
         message = data.get('message')
         language = data.get('language', 'en')
 
@@ -39,18 +32,12 @@ def chat():
             logger.warning("Missing required fields in request")
             return jsonify({"error": "Missing session_id, user_id, or message"}), 400
 
-        # Validate session
         if not validate_session(session_id):
             logger.warning(f"Invalid session: {session_id}")
             return jsonify({"error": "Invalid session"}), 401
 
-        # Get or create conversation handler for this session
         handler = _get_or_create_handler(session_id)
-
-        # Process message and generate response
         response_data = _process_message(handler, message, session_id, user_id, language)
-
-        # Clean up old sessions if needed
         _cleanup_old_sessions()
 
         return jsonify(response_data)
@@ -61,32 +48,25 @@ def chat():
         return _create_error_response(e)
 
 def _get_or_create_handler(session_id: str) -> ConversationHandler:
-    """Get existing conversation handler or create a new one for the session."""
     if session_id not in conversation_handlers:
         logger.info(f"Creating new conversation handler for session: {session_id}")
         conversation_handlers[session_id] = ConversationHandler()
     return conversation_handlers[session_id]
 
 def _process_message(handler: ConversationHandler, message: str, session_id: str, user_id: str, language: str) -> dict:
-    """Process the incoming message and generate a response."""
-    # Generate response using the conversation handler
     response = handler.generate_response(message, session_id, user_id, language)
-    
-    # Get the current context
     context = handler.context.get_context(user_id)
     
-    # Create the response data structure
     response_data = {
         "message": response,
         "context": {
             "interaction_count": context["interaction_count"],
             "identified_themes": list(context["identified_themes"]),
             "crisis_mode": context["crisis_mode"],
-            "previous_intent": context["previous_intent"].value if context["previous_intent"] else None
+            "previous_intent": context.get("previous_intent", None)  # Handle missing previous_intent
         }
     }
 
-    # Add crisis resources if in crisis mode
     if context["crisis_mode"]:
         response_data.update({
             "priority": "urgent",
@@ -100,27 +80,19 @@ def _process_message(handler: ConversationHandler, message: str, session_id: str
     return response_data
 
 def _create_error_response(error: Exception) -> tuple:
-    """Create an appropriate error response."""
     response = {
         "error": "Internal server error",
         "message": "I apologize, but something went wrong. Please try again."
     }
-    
-    # Include error details in debug mode
     if logger.getEffectiveLevel() == logging.DEBUG:
         response["details"] = str(error)
-    
     return jsonify(response), 500
 
 def _cleanup_old_sessions(max_sessions: int = 1000):
-    """
-    Clean up old sessions if we're storing too many.
-    Removes oldest sessions based on interaction count.
-    """
     if len(conversation_handlers) > max_sessions:
         sorted_sessions = sorted(
             conversation_handlers.items(),
-            key=lambda x: x[1].context.get_context(x[1].context.get_context().get("user_id", "default"))["interaction_count"]
+            key=lambda x: x[1].context.get_context(x[1].context.get_context(x[1].sessions.get('default-session', Session('default-session', 'default-user')).user_id)["user_id"])["interaction_count"]
         )
         sessions_to_remove = len(conversation_handlers) - max_sessions
         for session_id, _ in sorted_sessions[:sessions_to_remove]:
