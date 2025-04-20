@@ -31,4 +31,4 @@ ERROR:app.routes.chat_routes:Traceback (most recent call last):
     raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
 TypeError: Object of type MessageIntent is not JSON serializable
 
-INFO:werkzeug:127.0.0.1 - - [20/Apr/2025 00:36:22] "POST /api/chat HTTP/1.1" 500 -
+INFO:werkzeug:127.0.0.1 - - [20/Apr/2025 00:42:22] "POST /api/chat HTTP/1.1" 500 -
