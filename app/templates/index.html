@@ -8,12 +8,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #D1D5DB; /* Light gray for text */
-            --secondary-color: #9CA3AF; /* Gray-400 for secondary text */
-            --background-color: #202123; /* Dark gray background */
-            --input-bg: #343541; /* Darker gray for input area */
-            --border-color: #4B5563; /* Gray-600 for borders */
-            --accent-color: #10A37F; /* Subtle green for active states (ChatGPT-like) */
+            --primary-color: #D1D5DB;
+            --secondary-color: #9CA3AF;
+            --background-color: #202123;
+            --input-bg: #343541;
+            --border-color: #4B5563;
+            --accent-color: #10A37F;
         }
 
         body {
@@ -39,15 +39,21 @@
         }
 
         .user {
-            background-color: #343541; /* Dark gray for user messages */
+            background-color: #343541;
             color: var(--primary-color);
             margin-left: auto;
         }
 
         .bot {
-            background-color: #2D2E33; /* Slightly lighter dark gray for bot */
+            background-color: #2D2E33;
             color: var(--primary-color);
             border: 1px solid var(--border-color);
+        }
+
+        .crisis-message {
+            background-color: #7F1D1D; /* Red for crisis urgency */
+            color: #FECACA;
+            border: 1px solid #B91C1C;
         }
 
         .typing-indicator {
@@ -94,7 +100,7 @@
         }
 
         .sidebar {
-            background: #2D2E33; /* Darker sidebar */
+            background: #2D2E33;
             border-right: 1px solid var(--border-color);
             transition: transform 0.3s ease-in-out;
             transform: translateX(-100%);
@@ -136,16 +142,12 @@
     </style>
 </head>
 <body class="min-h-screen">
-    <!-- Sidebar Overlay -->
     <div id="overlay" class="sidebar-overlay fixed inset-0 z-30 hidden"></div>
-
-    <!-- Mobile Menu Button -->
     <button id="mobile-menu" class="md:hidden fixed top-4 left-4 z-50 bg-gray-800 text-white p-2 rounded-lg">
         <i class="fas fa-bars"></i>
     </button>
 
     <div class="flex h-screen">
-        <!-- Sidebar -->
         <aside id="sidebar" class="sidebar w-64 h-screen fixed md:relative z-40 overflow-y-auto">
             <div class="p-4 border-b border-gray-700">
                 <div class="flex items-center justify-between">
@@ -155,16 +157,12 @@
                     </button>
                 </div>
             </div>
-            
-            <!-- New Chat Button -->
             <div class="p-4">
                 <button class="w-full bg-gray-800 text-white rounded-lg py-2 px-4 flex items-center justify-center gap-2 hover:bg-gray-700 transition-colors">
                     <i class="fas fa-plus"></i>
                     New Chat
                 </button>
             </div>
-
-            <!-- Navigation Items -->
             <nav class="p-4">
                 <div class="space-y-2">
                     <a href="#" class="nav-item flex items-center gap-3 text-gray-400 p-3">
@@ -194,8 +192,6 @@
                     </a>
                 </div>
             </nav>
-
-            <!-- Settings Section -->
             <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-700 bg-gray-800">
                 <a href="#" class="nav-item flex items-center gap-3 text-gray-400 p-3">
                     <i class="fas fa-cog"></i>
@@ -204,9 +200,7 @@
             </div>
         </aside>
 
-        <!-- Main Content -->
         <main class="flex-1 flex flex-col h-screen overflow-hidden md:ml-0">
-            <!-- Mood Check -->
             <div class="bg-gray-800 border-b border-gray-700 px-4 py-3">
                 <div class="flex items-center justify-between mb-3">
                     <p class="text-gray-400 text-sm">How are you feeling today?</p>
@@ -224,16 +218,13 @@
                 </div>
             </div>
 
-            <!-- Chat Interface -->
             <div class="flex-1 overflow-hidden flex flex-col p-4">
-                <!-- Chat Messages -->
                 <div id="chat-box" class="chat-container flex-1 overflow-y-auto mb-4">
                     <div class="message bot">
                         Hello! I'm Ssuubi, your mental health support assistant. How are you feeling today?
                     </div>
                 </div>
 
-                <!-- Input Area -->
                 <div class="input-container p-3 mx-auto max-w-4xl w-full">
                     <div class="flex items-center gap-3">
                         <input 
@@ -251,7 +242,6 @@
                     </div>
                 </div>
 
-                <!-- Footer -->
                 <footer class="text-center mt-4 text-xs text-gray-400">
                     <p>If you're in crisis, please reach out:</p>
                     <p class="mt-1">
@@ -291,9 +281,12 @@
             }
         });
 
-        function addMessage(sender, message) {
+        function addMessage(sender, message, isCrisis = false) {
             const messageElement = document.createElement('div');
             messageElement.classList.add('message', sender);
+            if (isCrisis) {
+                messageElement.classList.add('crisis-message');
+            }
             messageElement.innerHTML = `<p>${message}</p>`;
             chatBox.appendChild(messageElement);
             chatBox.scrollTop = chatBox.scrollHeight;
@@ -323,13 +316,31 @@
                     },
                     body: JSON.stringify({
                         session_id: 'demo-session',
-                        message: message
+                        user_id: 'user123', // Added user_id
+                        message: message,
+                        language: 'en'
                     }),
                 });
 
+                if (!response.ok) {
+                    throw new Error(`HTTP error: ${response.status}`);
+                }
+
                 const data = await response.json();
                 chatBox.removeChild(typingIndicator);
-                addMessage('bot', data.message);
+
+                // Handle crisis mode
+                const isCrisis = data.context && data.context.crisis_mode;
+                let messageText = data.message;
+
+                if (isCrisis && data.resources) {
+                    messageText += `<br><br><strong>Crisis Resources:</strong><br>` +
+                        `Call: <a href="tel:${data.resources.crisis_line}" class="resource-link">${data.resources.crisis_line}</a><br>` +
+                        `${data.resources.crisis_text}<br>` +
+                        `Emergency: <a href="tel:${data.resources.emergency}" class="resource-link">${data.resources.emergency}</a>`;
+                }
+
+                addMessage('bot', messageText, isCrisis);
 
             } catch (error) {
                 console.error('Error:', error);
@@ -346,9 +357,10 @@
         });
 
         document.querySelectorAll('.mood-button').forEach(button => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', async () => {
                 const mood = button.textContent.split(' ')[1];
-                addMessage('bot', `Thanks for sharing that you're feeling ${mood}. Want to talk about it?`);
+                addMessage('user', `I'm feeling ${mood}`);
+                await handleUserInput(`I'm feeling ${mood}`);
             });
         });
     </script>
