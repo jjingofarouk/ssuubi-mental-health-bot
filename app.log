@@ -496,3 +496,10 @@ KeyError: 'previous_intent'
     raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
 TypeError: Object of type MessageIntent is not JSON serializable
 
+2025-04-20 00:47:32,013 - app.routes.chat_routes - INFO - Creating new conversation handler for session: demo-session
+2025-04-20 00:47:34,266 - app.services.response_generator - WARNING - mental_health_responses.json not found, using empty responses
+2025-04-20 00:47:38,283 - app.services.context - INFO - Initialized in-memory context storage
+2025-04-20 00:47:38,293 - app.services.conversation_handler - INFO - Created session demo-session for user user123
+2025-04-20 00:47:38,385 - app.services.response_generator - WARNING - No matching response for intent MessageIntent.GREETING and themes []
+2025-04-20 00:48:01,822 - app.services.conversation_handler - ERROR - Error in conversation handler: 'ellipsis' object has no attribute 'search'
+2025-04-20 00:48:07,880 - app.services.conversation_handler - ERROR - Error in conversation handler: 'ellipsis' object has no attribute 'search'
