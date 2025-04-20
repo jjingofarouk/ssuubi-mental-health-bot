@@ -57,13 +57,18 @@ def _process_message(handler: ConversationHandler, message: str, session_id: str
     response = handler.generate_response(message, session_id, user_id, language)
     context = handler.context.get_context(user_id)
     
+    # Convert MessageIntent to string if present
+    previous_intent = context.get("previous_intent")
+    if isinstance(previous_intent, MessageIntent):
+        previous_intent = previous_intent.value
+    
     response_data = {
         "message": response,
         "context": {
             "interaction_count": context["interaction_count"],
             "identified_themes": list(context["identified_themes"]),
             "crisis_mode": context["crisis_mode"],
-            "previous_intent": context.get("previous_intent", None)  # Handle missing previous_intent
+            "previous_intent": previous_intent
         }
     }
 
@@ -92,7 +97,7 @@ def _cleanup_old_sessions(max_sessions: int = 1000):
     if len(conversation_handlers) > max_sessions:
         sorted_sessions = sorted(
             conversation_handlers.items(),
-            key=lambda x: x[1].context.get_context(x[1].context.get_context(x[1].sessions.get('default-session', Session('default-session', 'default-user')).user_id)["user_id"])["interaction_count"]
+            key=lambda x: x[1].context.get_context(x[1].sessions.get('default-session', Session('default-session', 'default-user')).user_id)["interaction_count"]
         )
         sessions_to_remove = len(conversation_handlers) - max_sessions
         for session_id, _ in sorted_sessions[:sessions_to_remove]:
